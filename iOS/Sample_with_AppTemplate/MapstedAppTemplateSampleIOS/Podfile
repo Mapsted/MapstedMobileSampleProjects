@@ -1,0 +1,62 @@
+# Uncomment the next line to define a global platform for your project
+
+
+platform :ios, '13.0'
+use_frameworks!
+
+source 'https://cdn.cocoapods.org/'
+source 'https://github.com/Mapsted/podspec-dev.git'
+
+def common_pods
+ pod 'mapsted-sdk-app-template','6.0'
+end
+target 'MapstedAppTemplateSampleIOS' do
+  common_pods  
+end
+
+post_install do |installer|
+  
+  # Remove the static libraries from OTHER_LDFLAGS
+  frameworkNames = ['MapSDK']
+  
+  installer.aggregate_targets.each do |pod_target|
+    pod_target.xcconfigs.each do |config_name, config_file|
+      frameworkNames.each do |name|
+        config_file.frameworks.delete(name)
+      end
+      xcconfig_path = pod_target.xcconfig_path(config_name)
+      config_file.save_as(xcconfig_path)
+    end
+  end
+  
+  # Remove the 'IPHONEOS_DEPLOYMENT_TARGET'
+  installer.pods_project.targets.each do |target|
+    target.build_configurations.each do |config|
+      config.build_settings.delete 'IPHONEOS_DEPLOYMENT_TARGET'
+    end
+  end
+# Remove the 'DT_TOOLCHAIN_DIR'
+  xcode_base_version = `xcodebuild -version | grep 'Xcode' | awk '{print $2}' | cut -d . -f 1`
+
+  installer.pods_project.targets.each do |target|
+    target.build_configurations.each do |config|
+      # For xcode 15+ only
+      if config.base_configuration_reference && Integer(xcode_base_version) >= 15
+        xcconfig_path = config.base_configuration_reference.real_path
+        xcconfig = File.read(xcconfig_path)
+        xcconfig_mod = xcconfig.gsub(/DT_TOOLCHAIN_DIR/, "TOOLCHAIN_DIR")
+        File.open(xcconfig_path, "w") { |file| file << xcconfig_mod }
+      end
+    end
+  end
+
+  installer.pods_project.targets.each do |target|
+  # Check if the target name is not 'Kingfisher'
+    unless target.name == 'Kingfisher'
+      target.build_configurations.each do |config|
+         config.build_settings['BUILD_LIBRARY_FOR_DISTRIBUTION'] = 'YES'
+      end
+    end
+  end
+end
+
