@@ -95,7 +95,5 @@ class MainActivity : AppTemplateMainActivity() {
             .addMenu(R.drawable.three_dash_icon, getString(com.mapsted.app_template.R.string.option_menu), menuType = MenuUtil.MenuType.Menu)
             .addMenu(R.drawable.icon_menu_favourites, getString(R.string.favourite), menuType = MenuUtil.MenuType.Favorites)
             .build()*/
-
-        //NOTE- Menu, bottom navigation bar item is compulsory, if you want to switch the property.
     }
 }
