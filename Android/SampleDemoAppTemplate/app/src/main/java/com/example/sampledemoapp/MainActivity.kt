@@ -96,19 +96,6 @@ class MainActivity : AppTemplateMainActivity() {
             .addMenu(R.drawable.icon_menu_favourites, getString(R.string.favourite), menuType = MenuUtil.MenuType.Favorites)
             .build()*/
 
-        //NOTE- Menu, bottom tabbar item is compulsory, if you want to switch the property.
+        //NOTE- Menu, bottom navigation bar item is compulsory, if you want to switch the property.
     }
-
-//    override fun onConfigurationChanged(newConfig: Configuration) {
-//        Toast.makeText(
-//            this@MainActivity, "Restarting with new configs",
-//            Toast.LENGTH_SHORT
-//        ).show()
-//        val intent = Intent(this, MainActivity::class.java)
-//        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
-//        startActivity(intent)
-//        super.onConfigurationChanged(newConfig)
-//        finishAffinity()
-//        exitProcess(0)
-//    }
 }
