@@ -9,6 +9,7 @@ source 'https://github.com/Mapsted/podspec.git'
 
 def common_pods
  pod 'mapsted-sdk-app-template','6.0'
+ pod 'mapsted-sdk-app-template','~> 6.0'
 end
 target 'MapstedAppTemplateSampleIOS' do
   common_pods  
