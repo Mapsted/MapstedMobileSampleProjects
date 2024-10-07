@@ -1,4 +1,4 @@
-import org.gradle.internal.impldep.org.junit.experimental.categories.Categories.CategoryFilter.exclude
+
 
 plugins {
     alias(libs.plugins.android.application)
@@ -61,22 +61,22 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+    implementation (libs.firebase.messaging.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
     // Mapsted
-    val mapstedSdkVersion = "6.0.1"
-    implementation("com.mapsted:app-template:${mapstedSdkVersion}")
-    implementation("com.mapsted:app-template-core:$mapstedSdkVersion")
-    implementation("com.mapsted:sdk-loc-share:$mapstedSdkVersion")
-    implementation("com.mapsted:sdk-loc-marketing:$mapstedSdkVersion")
-    implementation("com.mapsted:sdk-ui-components:$mapstedSdkVersion")
-    implementation("com.mapsted:sdk-map-ui:$mapstedSdkVersion")
-    implementation("com.mapsted:sdk-map:$mapstedSdkVersion")
-//    implementation("com.mapsted:sdk-alerts:$mapstedSdkVersion")
-    implementation("com.mapsted:sdk-inapp-notification:$mapstedSdkVersion")
-    implementation("com.mapsted:sdk-geofence:$mapstedSdkVersion")
-    implementation("com.mapsted:sdk-geofence-offline:$mapstedSdkVersion")
-    implementation("com.mapsted:sdk-core:$mapstedSdkVersion")
+    implementation(libs.app.template)
+    implementation(libs.app.template.core)
+    implementation(libs.sdk.loc.share)
+    implementation(libs.sdk.loc.marketing)
+    implementation (libs.sdk.alerts)
+    implementation(libs.sdk.ui.components)
+    implementation(libs.sdk.map.ui)
+    implementation(libs.sdk.map)
+    implementation(libs.sdk.inapp.notification)
+    implementation(libs.sdk.geofence)
+    implementation(libs.sdk.geofence.offline)
+    implementation(libs.sdk.core)
 }
