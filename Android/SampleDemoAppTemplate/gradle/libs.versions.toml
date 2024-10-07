@@ -1,5 +1,6 @@
 [versions]
 agp = "8.5.0"
+firebaseMessagingKtx = "24.0.2"
 googleServices = "4.4.2"
 kotlin = "1.9.0"
 coreKtx = "1.13.1"
@@ -7,12 +8,16 @@ junit = "4.13.2"
 junitVersion = "1.2.1"
 espressoCore = "3.6.1"
 appcompat = "1.7.0"
+mapstedSdkVersion = "6.0.3-alert-revert-test"
 material = "1.12.0"
 activity = "1.9.2"
 constraintlayout = "2.1.4"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+app-template = { module = "com.mapsted:app-template", version.ref = "mapstedSdkVersion" }
+app-template-core = { module = "com.mapsted:app-template-core", version.ref = "mapstedSdkVersion" }
+firebase-messaging-ktx = { module = "com.google.firebase:firebase-messaging-ktx", version.ref = "firebaseMessagingKtx" }
 google-services = { module = "com.google.gms:google-services", version.ref = "googleServices" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
@@ -21,6 +26,16 @@ androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
+sdk-alerts = { module = "com.mapsted:sdk-alerts", version.ref = "mapstedSdkVersion" }
+sdk-core = { module = "com.mapsted:sdk-core", version.ref = "mapstedSdkVersion" }
+sdk-geofence-offline = { module = "com.mapsted:sdk-geofence-offline", version.ref = "mapstedSdkVersion" }
+sdk-geofence = { module = "com.mapsted:sdk-geofence", version.ref = "mapstedSdkVersion" }
+sdk-inapp-notification = { module = "com.mapsted:sdk-inapp-notification", version.ref = "mapstedSdkVersion" }
+sdk-loc-marketing = { module = "com.mapsted:sdk-loc-marketing", version.ref = "mapstedSdkVersion" }
+sdk-loc-share = { module = "com.mapsted:sdk-loc-share", version.ref = "mapstedSdkVersion" }
+sdk-map = { module = "com.mapsted:sdk-map", version.ref = "mapstedSdkVersion" }
+sdk-map-ui = { module = "com.mapsted:sdk-map-ui", version.ref = "mapstedSdkVersion" }
+sdk-ui-components = { module = "com.mapsted:sdk-ui-components", version.ref = "mapstedSdkVersion" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
