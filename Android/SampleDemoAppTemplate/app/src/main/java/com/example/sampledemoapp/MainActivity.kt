@@ -53,7 +53,7 @@ class MainActivity : AppTemplateMainActivity() {
                 menuType = MenuUtil.MenuType.Home
             )
             .addCustomMenu(
-                com.mapsted.app_template.R.drawable.three_dash_icon,
+                com.mapsted.app_template.R.drawable.ic_account_circle,
                 "Menu",
                 "com.mapsted.app_template.presentation.menu.MenuFragment"
             )
@@ -66,6 +66,14 @@ class MainActivity : AppTemplateMainActivity() {
                 com.mapsted.app_template.R.drawable.icon_menu_favourites,
                 "Favorite",
                 menuType = MenuUtil.MenuType.Favorites
+            )
+            .setFallBack(
+//   Icon to be set on the fallback menu on bottom navigation bar
+                com.mapsted.app_template.R.drawable.ic_favourite,
+//   Text to be set on the fallback menu on the bottom navigation bar
+                "Favorites",
+//  Provide the fully qualified class name of the fragment that should open upon tapping.
+                invokableClassName = "com.mapsted.template_core.ui.favorites.FavoritesFragment"
             )
             .build()
 
@@ -95,5 +103,6 @@ class MainActivity : AppTemplateMainActivity() {
             .addMenu(R.drawable.three_dash_icon, getString(com.mapsted.app_template.R.string.option_menu), menuType = MenuUtil.MenuType.Menu)
             .addMenu(R.drawable.icon_menu_favourites, getString(R.string.favourite), menuType = MenuUtil.MenuType.Favorites)
             .build()*/
+
     }
 }
