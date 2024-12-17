@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5F4634D76F4AED2FE4C0660D /* Pods_MapstedAppTemplateSampleIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43DF164619840A83AED971BF /* Pods_MapstedAppTemplateSampleIOS.framework */; };
+		8B86B8133A42E402EF81EFC5 /* Pods_MapstedAppTemplateSampleIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8CC1DA04A5300E918624A7B /* Pods_MapstedAppTemplateSampleIOS.framework */; };
 		941878912C932013006A2963 /* Logo-Animation-Dark.gif in Resources */ = {isa = PBXBuildFile; fileRef = 9418788F2C932013006A2963 /* Logo-Animation-Dark.gif */; };
 		941878922C932013006A2963 /* Logo-Animation.gif in Resources */ = {isa = PBXBuildFile; fileRef = 941878902C932013006A2963 /* Logo-Animation.gif */; };
 		941E2F962C88C38100659F36 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941E2F952C88C38100659F36 /* AppDelegate.swift */; };
@@ -20,8 +20,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		43DF164619840A83AED971BF /* Pods_MapstedAppTemplateSampleIOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MapstedAppTemplateSampleIOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		85B5AE86E84E5BEFA53EA862 /* Pods-MapstedAppTemplateSampleIOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MapstedAppTemplateSampleIOS.release.xcconfig"; path = "Target Support Files/Pods-MapstedAppTemplateSampleIOS/Pods-MapstedAppTemplateSampleIOS.release.xcconfig"; sourceTree = "<group>"; };
 		9418788F2C932013006A2963 /* Logo-Animation-Dark.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Logo-Animation-Dark.gif"; sourceTree = "<group>"; };
 		941878902C932013006A2963 /* Logo-Animation.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Logo-Animation.gif"; sourceTree = "<group>"; };
 		941E2F922C88C38100659F36 /* MapstedAppTemplateSampleIOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MapstedAppTemplateSampleIOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -33,7 +31,9 @@
 		941E2FA32C88C38200659F36 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		949870BA2C9B23B700E3CFD8 /* ios_licence.key */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_licence.key; sourceTree = "<group>"; };
 		94DF1BDA2C89DBD300E1C112 /* InitialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
-		EC1D4DF63A9A7416B9A3E776 /* Pods-MapstedAppTemplateSampleIOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MapstedAppTemplateSampleIOS.debug.xcconfig"; path = "Target Support Files/Pods-MapstedAppTemplateSampleIOS/Pods-MapstedAppTemplateSampleIOS.debug.xcconfig"; sourceTree = "<group>"; };
+		AF099E71BA1B450EFDCBBB00 /* Pods-MapstedAppTemplateSampleIOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MapstedAppTemplateSampleIOS.release.xcconfig"; path = "Target Support Files/Pods-MapstedAppTemplateSampleIOS/Pods-MapstedAppTemplateSampleIOS.release.xcconfig"; sourceTree = "<group>"; };
+		B8CC1DA04A5300E918624A7B /* Pods_MapstedAppTemplateSampleIOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MapstedAppTemplateSampleIOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F579F2B15F9D8695D290A1F3 /* Pods-MapstedAppTemplateSampleIOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MapstedAppTemplateSampleIOS.debug.xcconfig"; path = "Target Support Files/Pods-MapstedAppTemplateSampleIOS/Pods-MapstedAppTemplateSampleIOS.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,21 +41,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5F4634D76F4AED2FE4C0660D /* Pods_MapstedAppTemplateSampleIOS.framework in Frameworks */,
+				8B86B8133A42E402EF81EFC5 /* Pods_MapstedAppTemplateSampleIOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		8C4EF0840E08EACF20A977C3 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				43DF164619840A83AED971BF /* Pods_MapstedAppTemplateSampleIOS.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		9418788A2C931DB6006A2963 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
@@ -72,7 +64,7 @@
 				941E2F942C88C38100659F36 /* MapstedAppTemplateSampleIOS */,
 				941E2F932C88C38100659F36 /* Products */,
 				F8E6D7BFD170D6A162B9BA92 /* Pods */,
-				8C4EF0840E08EACF20A977C3 /* Frameworks */,
+				E5C65DDBBB3656D4ECD8755D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -99,11 +91,19 @@
 			path = MapstedAppTemplateSampleIOS;
 			sourceTree = "<group>";
 		};
+		E5C65DDBBB3656D4ECD8755D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B8CC1DA04A5300E918624A7B /* Pods_MapstedAppTemplateSampleIOS.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		F8E6D7BFD170D6A162B9BA92 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				EC1D4DF63A9A7416B9A3E776 /* Pods-MapstedAppTemplateSampleIOS.debug.xcconfig */,
-				85B5AE86E84E5BEFA53EA862 /* Pods-MapstedAppTemplateSampleIOS.release.xcconfig */,
+				F579F2B15F9D8695D290A1F3 /* Pods-MapstedAppTemplateSampleIOS.debug.xcconfig */,
+				AF099E71BA1B450EFDCBBB00 /* Pods-MapstedAppTemplateSampleIOS.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -115,11 +115,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 941E2FA62C88C38200659F36 /* Build configuration list for PBXNativeTarget "MapstedAppTemplateSampleIOS" */;
 			buildPhases = (
-				2EDF0C14445BC58AF30B78D1 /* [CP] Check Pods Manifest.lock */,
+				9E4736CDC063E1F701D13227 /* [CP] Check Pods Manifest.lock */,
 				941E2F8E2C88C38100659F36 /* Sources */,
 				941E2F8F2C88C38100659F36 /* Frameworks */,
 				941E2F902C88C38100659F36 /* Resources */,
-				728C11C8D98BBE9BF6A1BE85 /* [CP] Embed Pods Frameworks */,
+				0513A360061080B46C5EFC64 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -180,7 +180,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		2EDF0C14445BC58AF30B78D1 /* [CP] Check Pods Manifest.lock */ = {
+		0513A360061080B46C5EFC64 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MapstedAppTemplateSampleIOS/Pods-MapstedAppTemplateSampleIOS-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MapstedAppTemplateSampleIOS/Pods-MapstedAppTemplateSampleIOS-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MapstedAppTemplateSampleIOS/Pods-MapstedAppTemplateSampleIOS-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9E4736CDC063E1F701D13227 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -200,23 +217,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		728C11C8D98BBE9BF6A1BE85 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-MapstedAppTemplateSampleIOS/Pods-MapstedAppTemplateSampleIOS-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-MapstedAppTemplateSampleIOS/Pods-MapstedAppTemplateSampleIOS-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MapstedAppTemplateSampleIOS/Pods-MapstedAppTemplateSampleIOS-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -375,7 +375,7 @@
 		};
 		941E2FA72C88C38200659F36 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = EC1D4DF63A9A7416B9A3E776 /* Pods-MapstedAppTemplateSampleIOS.debug.xcconfig */;
+			baseConfigurationReference = F579F2B15F9D8695D290A1F3 /* Pods-MapstedAppTemplateSampleIOS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -406,7 +406,7 @@
 		};
 		941E2FA82C88C38200659F36 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 85B5AE86E84E5BEFA53EA862 /* Pods-MapstedAppTemplateSampleIOS.release.xcconfig */;
+			baseConfigurationReference = AF099E71BA1B450EFDCBBB00 /* Pods-MapstedAppTemplateSampleIOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

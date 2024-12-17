@@ -178,54 +178,30 @@ extension MapViewController : PropertyDownloadListener {
 	}
 }
 
-extension MapViewController: MNMapVectorElementListenerDelegate {
-    func onPolygonTapped(polygon: MNMapPolygon, tapType: MapstedMap.MapstedMapApi.TapType, tapPos: MNMercator) {
-    }
-    
-    func onEntityTapped(entity: MNMapEntity, tapType: MapstedMap.MapstedMapApi.TapType, tapPos: MNMercator) {
-        print("onEntityTapped: \(entity.name) - entityId: \(entity.entityId())")
-        MapstedMapApi.shared.selectSearchEntity(entity: entity, showPopup: false)
-    }
-    
-    func onBalloonClicked(searchEntity: MNSearchEntity) {
-    }
-    
-    func onMarkerTapped(markerName: String, markerType: String) {
+extension MapViewController: MapEventListener {
+    func onMapEvent(event: MapstedMap.MapEvent) {
+        if event == .MAP_IDLE {
+            //Handle map idle
+        } else if event == .MAP_MOVED {
+            //Handle map moved
+        } else if event == .MAP_STABLE {
+            //Handle map stable
+        } else if event == .MAP_INTERACTION {
+            //Handle map stable
+        }
     }
 }
 
-extension MapViewController: MNMapVectorTileEventListenerDelegate {
-    public func onTileBalloonClicked(searchEntity: MNSearchEntity) {
-        self.onBalloonClicked(searchEntity: searchEntity)
-    }
-    
-    public func onTileMarkerTapped(markerName: String, markerType: String) {
-        self.onMarkerTapped(markerName: markerName, markerType: markerType)
-    }
-
-    public func onTileEntityTapped(entity: MNMapEntity, tapType: MapstedMapApi.TapType, tapPos: MNMercator) {
-        self.onEntityTapped(entity: entity, tapType: tapType, tapPos: tapPos)
-    }
-    
-    public func onTilePolygonTapped(polygon: MNMapPolygon, tapType: MapstedMapApi.TapType, tapPos: MNMercator) {
-        self.onPolygonTapped(polygon: polygon, tapType: tapType, tapPos: tapPos)
-    }
-}
-
-
-extension MapViewController: MNMapListenerDelegate {
-    func onMapMoved() {
-    }
-    
-    func onMapStable() {
-    }
-    
-    func onMapIdle() {
-    }
-    
-    func onMapInteraction() {
-    }
-    
-    func outsideBuildingTapped(tapPos: MNMercator, tapType: MapstedMap.MapstedMapApi.TapType) {
+extension MapViewController: MapClickListener {
+    func onMapClicked(event: MapstedMap.MapClickEvent) {
+        if event.getClickType() == .SINGLE {
+            if let clickedEntity = event.getClickEntity() {
+                //Process tapped entity
+            } else if let mapOverlay = event.getClickOverlay(), !mapOverlay.toolTipName.isEmpty {
+                //Process tapped overlay
+            }
+        } else {
+            //Handle other click types (e.g.,long-press, outside map area,tap on walk way)
+        }
     }
 }

@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:MapstedHQ.gpx">
+   </FileRef>
+   <FileRef
       location = "group:MapstedAppTemplateSampleIOS.xcodeproj">
    </FileRef>
    <FileRef

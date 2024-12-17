@@ -1,67 +1,29 @@
 PODS:
-  - Kingfisher (7.12.0)
-  - mapsted-sdk-alerts (6.0):
-    - mapsted-sdk-triggers-core (= 6.0)
-  - mapsted-sdk-components (6.0):
-    - Kingfisher
-    - mapsted-sdk-core (= 6.0)
-  - mapsted-sdk-core (6.0):
+  - mapsted-sdk-core (6.1.0):
     - SSZipArchive
   - mapsted-sdk-core-map (4.4.6.2)
-  - mapsted-sdk-geofence (6.0):
-    - mapsted-sdk-core (= 6.0)
-  - mapsted-sdk-loc-marketing (6.0):
-    - mapsted-sdk-triggers-core (= 6.0)
-  - mapsted-sdk-location-share (6.0):
-    - mapsted-sdk-core (= 6.0)
-  - mapsted-sdk-map (6.0):
-    - mapsted-sdk-core (= 6.0)
+  - mapsted-sdk-map (6.1.0):
+    - mapsted-sdk-core (= 6.1.0)
     - mapsted-sdk-core-map (= 4.4.6.2)
-  - mapsted-sdk-map-ui (6.0):
-    - mapsted-sdk-alerts (= 6.0)
-    - mapsted-sdk-components (= 6.0)
-    - mapsted-sdk-loc-marketing (= 6.0)
-    - mapsted-sdk-location-share (= 6.0)
-    - mapsted-sdk-map (= 6.0)
-  - mapsted-sdk-triggers-core (6.0):
-    - mapsted-sdk-core (= 6.0)
   - SSZipArchive (2.4.3)
 
 DEPENDENCIES:
-  - mapsted-sdk-geofence (~> 6.0)
   - mapsted-sdk-map (~> 6.0)
-  - mapsted-sdk-map-ui (~> 6.0)
 
 SPEC REPOS:
-  https://github.com/Mapsted/podspec-dev.git:
-    - mapsted-sdk-alerts
-    - mapsted-sdk-components
+  https://github.com/Mapsted/podspec:
     - mapsted-sdk-core
     - mapsted-sdk-core-map
-    - mapsted-sdk-geofence
-    - mapsted-sdk-loc-marketing
-    - mapsted-sdk-location-share
     - mapsted-sdk-map
-    - mapsted-sdk-map-ui
-    - mapsted-sdk-triggers-core
   trunk:
-    - Kingfisher
     - SSZipArchive
 
 SPEC CHECKSUMS:
-  Kingfisher: 53a10ea35051a436b5fb626ca2dd8f3144d755e9
-  mapsted-sdk-alerts: d2e459c58eeb01c53f65b47c6ac0824e93e3a77a
-  mapsted-sdk-components: 41d778d7cbbe1782cdd5f09506115a78f92d6bb5
-  mapsted-sdk-core: 39a921fc6a842b9ffdd8094e07d9396183876e32
-  mapsted-sdk-core-map: 37f9d7eae4d10e6d2ac1ba1954e5c1068af74b5a
-  mapsted-sdk-geofence: ce682d367c66930cb40f0d7be7537bcf5732a1e2
-  mapsted-sdk-loc-marketing: 066f3a149744a19463e2b210fd46186c9c2c0e7c
-  mapsted-sdk-location-share: 108ede3f01a476f0e1b184877148bfcfa1d840ac
-  mapsted-sdk-map: c5e028e09d96c12a6ede8a0041b874fd18fe191f
-  mapsted-sdk-map-ui: 5c5ea7471aaea1068e8a98b96f97b401508ab4e4
-  mapsted-sdk-triggers-core: 190d39957ade06844a09568e25224fc154387dc5
+  mapsted-sdk-core: 3cf7a8951f5c34a07d15b2c7e2c0058447f0abeb
+  mapsted-sdk-core-map: f9f54c75dc87cc515e05df239242804da3625239
+  mapsted-sdk-map: 1b43b5d45eca22e002a61ea0052e2885d609b1c7
   SSZipArchive: fe6a26b2a54d5a0890f2567b5cc6de5caa600aef
 
-PODFILE CHECKSUM: 9767839608819eaa7b86a4e7c0db6103691854b3
+PODFILE CHECKSUM: 8565a3afd2563f37ad75c6b521cd7b404de550f2
 
 COCOAPODS: 1.15.2

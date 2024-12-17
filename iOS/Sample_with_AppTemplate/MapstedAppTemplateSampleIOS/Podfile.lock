@@ -1,11 +1,20 @@
 PODS:
   - mapsted-sdk-alerts (6.1.0):
     - mapsted-sdk-triggers-core (= 6.1.0)
+  - mapsted-sdk-app-template (6.1.0):
+    - mapsted-sdk-alerts (= 6.1.0)
+    - mapsted-sdk-core (= 6.1.0)
+    - mapsted-sdk-loc-marketing (= 6.1.0)
+    - mapsted-sdk-location-share (= 6.1.0)
+    - mapsted-sdk-map (= 6.1.0)
+    - mapsted-sdk-map-ui (= 6.1.0)
+    - mapsted-sdk-topbar-notification (= 6.1.0)
+    - mapsted-sdk-triggers-core (= 6.1.0)
+    - SDWebImage
+    - SSZipArchive
   - mapsted-sdk-core (6.1.0):
     - SSZipArchive
   - mapsted-sdk-core-map (4.4.6.2)
-  - mapsted-sdk-geofence (6.1.0):
-    - mapsted-sdk-core (= 6.1.0)
   - mapsted-sdk-loc-marketing (6.1.0):
     - mapsted-sdk-core (= 6.1.0)
   - mapsted-sdk-location-share (6.1.0):
@@ -31,15 +40,14 @@ PODS:
   - SSZipArchive (2.4.3)
 
 DEPENDENCIES:
-  - mapsted-sdk-geofence (~> 6.0)
-  - mapsted-sdk-map-ui (~> 6.0)
+  - mapsted-sdk-app-template (~> 6.0)
 
 SPEC REPOS:
   https://github.com/Mapsted/podspec:
     - mapsted-sdk-alerts
+    - mapsted-sdk-app-template
     - mapsted-sdk-core
     - mapsted-sdk-core-map
-    - mapsted-sdk-geofence
     - mapsted-sdk-loc-marketing
     - mapsted-sdk-location-share
     - mapsted-sdk-map
@@ -52,9 +60,9 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   mapsted-sdk-alerts: 60e617c4037bf0597259bf23470c72dbeb49bcc3
+  mapsted-sdk-app-template: 107dc5822276589ab561c770907f12e5baebf6a5
   mapsted-sdk-core: 3cf7a8951f5c34a07d15b2c7e2c0058447f0abeb
   mapsted-sdk-core-map: f9f54c75dc87cc515e05df239242804da3625239
-  mapsted-sdk-geofence: 67863fce1a80e8d08f634cbe067874a69af52fc9
   mapsted-sdk-loc-marketing: 6496d94e2c218155ea9172004402c90bb6c9f43c
   mapsted-sdk-location-share: 511495a6560da831e01b7325d922936d2076abbd
   mapsted-sdk-map: 1b43b5d45eca22e002a61ea0052e2885d609b1c7
@@ -64,6 +72,6 @@ SPEC CHECKSUMS:
   SDWebImage: 73c6079366fea25fa4bb9640d5fb58f0893facd8
   SSZipArchive: fe6a26b2a54d5a0890f2567b5cc6de5caa600aef
 
-PODFILE CHECKSUM: 92dfb1ad231497948afd177f57bc784bd69565a1
+PODFILE CHECKSUM: e388fc34a80a1e3916e0d6a7a1032bf6332bab4f
 
 COCOAPODS: 1.15.2
