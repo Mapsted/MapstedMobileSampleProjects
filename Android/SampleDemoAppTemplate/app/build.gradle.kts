@@ -79,4 +79,5 @@ dependencies {
     implementation(libs.sdk.geofence)
     implementation(libs.sdk.geofence.offline)
     implementation(libs.sdk.core)
+    implementation(libs.sdk.topbar.notifications)
 }
