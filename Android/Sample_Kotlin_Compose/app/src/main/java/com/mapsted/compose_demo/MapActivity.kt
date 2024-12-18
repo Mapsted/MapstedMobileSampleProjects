@@ -51,6 +51,8 @@ class MapActivity : AppCompatActivity(), MapstedMapUiApiProvider {
         tActivityStart = System.currentTimeMillis()
 
         setupMapUiApi()
+        // add below lines to integrate top notifications sdk,
+        // val  _topNotificationApi = MapstedTopbarNotificationApi(supportFragmentManager, binding.notificationContainer,mapApi)
     }
 
     override fun onDestroy() {

@@ -85,8 +85,10 @@ dependencies {
     implementation("com.google.android.gms:play-services-tasks:18.0.1")
 
     // Mapsted
-    val mapstedSdkVersion = "6.0.0"
+    val mapstedSdkVersion = "6.0.4"
     implementation("com.mapsted:sdk-map-ui:$mapstedSdkVersion")
     implementation("com.mapsted:sdk-map:$mapstedSdkVersion")
     implementation("com.mapsted:sdk-core:$mapstedSdkVersion")
+    // add below dependency to use topbar notifications
+    //implementation ("com.mapsted:sdk-topbar-notifications:${mapstedSdkVersion}")
 }
