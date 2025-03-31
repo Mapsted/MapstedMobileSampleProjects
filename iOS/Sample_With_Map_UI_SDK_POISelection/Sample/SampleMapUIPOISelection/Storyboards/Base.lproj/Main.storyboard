@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="k8O-rl-MHF">
+    <device id="retina5_9" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Container View Controller-->
+        <scene sceneID="zld-iL-p2g">
+            <objects>
+                <viewController id="QWg-b6-f21" customClass="ContainerViewController" customModule="MapstedMapUi" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="33u-oU-R5p">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="728"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="rUz-NN-q68"/>
+                        <color key="backgroundColor" systemColor="systemBrownColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tte-rP-HJ8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4815" y="814"/>
+        </scene>
+        <!--Main View Controller-->
+        <scene sceneID="1lY-di-96T">
+            <objects>
+                <viewController storyboardIdentifier="MainViewController" id="eha-OJ-IOy" customClass="MainViewController" customModule="Sample" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="vMc-KR-idq">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gSf-wl-pHe">
+                                <rect key="frame" x="0.0" y="50" width="375" height="728"/>
+                                <color key="backgroundColor" systemColor="systemGray4Color"/>
+                                <connections>
+                                    <segue destination="QWg-b6-f21" kind="embed" identifier="containerSegue" id="sOa-pU-szv"/>
+                                </connections>
+                            </containerView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="eIh-U1-kgE">
+                                <rect key="frame" x="169" y="387.66666666666669" width="37" height="37"/>
+                                <color key="color" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </activityIndicatorView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="S4Y-QR-fc1"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="gSf-wl-pHe" firstAttribute="top" secondItem="S4Y-QR-fc1" secondAttribute="top" id="SiY-xX-AZa"/>
+                            <constraint firstItem="eIh-U1-kgE" firstAttribute="centerY" secondItem="vMc-KR-idq" secondAttribute="centerY" id="XLR-Ps-hjc"/>
+                            <constraint firstItem="eIh-U1-kgE" firstAttribute="centerX" secondItem="vMc-KR-idq" secondAttribute="centerX" id="ZsO-60-d46"/>
+                            <constraint firstItem="S4Y-QR-fc1" firstAttribute="trailing" secondItem="gSf-wl-pHe" secondAttribute="trailing" id="ZuF-3c-5K4"/>
+                            <constraint firstItem="gSf-wl-pHe" firstAttribute="leading" secondItem="S4Y-QR-fc1" secondAttribute="leading" id="j7p-Yo-A8b"/>
+                            <constraint firstItem="S4Y-QR-fc1" firstAttribute="bottom" secondItem="gSf-wl-pHe" secondAttribute="bottom" id="lcv-O4-Qi1"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" largeTitleDisplayMode="always" customizationIdentifier="" id="HcG-Wa-4GJ"/>
+                    <connections>
+                        <outlet property="spinnerView" destination="eIh-U1-kgE" id="AIP-RS-8Pk"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dTy-qx-RfK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4308" y="102"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="zmj-Gc-F2l">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="k8O-rl-MHF" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="r19-aD-zSn">
+                        <rect key="frame" x="0.0" y="50" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="VUs-gW-PnH" kind="relationship" relationship="rootViewController" id="si3-ph-Qkt"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lAB-Gb-scm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2174" y="102"/>
+        </scene>
+        <!--Home View Controller-->
+        <scene sceneID="ntI-1Q-mKw">
+            <objects>
+                <viewController storyboardIdentifier="MainViewControllerMap" id="VUs-gW-PnH" customClass="HomeViewController" customModule="Sample" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Kgt-3j-4X6">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="EcV-G5-PxI">
+                                <rect key="frame" x="20" y="353.66666666666669" width="335" height="105"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" highlighted="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nl9-GR-L60" customClass="HighlightButton" customModule="Sample" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="335" height="45"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="45" id="sBM-kL-dl7"/>
+                                        </constraints>
+                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="Show Map"/>
+                                        <buttonConfiguration key="configuration" style="gray" title="Show Map"/>
+                                        <connections>
+                                            <action selector="gotoMapBtnAction:" destination="VUs-gW-PnH" eventType="touchUpInside" id="dyS-L3-bj6"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" highlighted="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sdk-9X-wRp" customClass="HighlightButton" customModule="Sample" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="60" width="335" height="45"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="45" id="DXe-B4-avY"/>
+                                        </constraints>
+                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="gray" title="Show POI on Map"/>
+                                        <connections>
+                                            <action selector="gotoEntityBtnAction:" destination="VUs-gW-PnH" eventType="touchUpInside" id="jQM-Fh-9s8"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Fl6-jL-meY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="EcV-G5-PxI" firstAttribute="leading" secondItem="Fl6-jL-meY" secondAttribute="leading" constant="20" id="Fmp-J8-31k"/>
+                            <constraint firstItem="Fl6-jL-meY" firstAttribute="trailing" secondItem="EcV-G5-PxI" secondAttribute="trailing" constant="20" id="LtY-YM-UkS"/>
+                            <constraint firstItem="EcV-G5-PxI" firstAttribute="centerY" secondItem="Kgt-3j-4X6" secondAttribute="centerY" id="iIE-H7-rNP"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="s8D-Hv-sz0"/>
+                    <connections>
+                        <outlet property="goToEntityBtn" destination="sdk-9X-wRp" id="nai-Oo-DJ5"/>
+                        <outlet property="goToMapBtn" destination="nl9-GR-L60" id="ue2-UL-xjp"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LQw-jy-UbN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3290" y="102"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBrownColor">
+            <color red="0.63529411764705879" green="0.51764705882352946" blue="0.36862745098039218" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemGray4Color">
+            <color red="0.81960784313725488" green="0.81960784313725488" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>

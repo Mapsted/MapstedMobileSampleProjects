@@ -1,0 +1,65 @@
+PODS:
+  - mapsted-sdk-alerts (6.1.5):
+    - mapsted-sdk-triggers-core (= 6.1.5)
+  - mapsted-sdk-core (6.1.5):
+    - SSZipArchive
+  - mapsted-sdk-core-map (4.4.6.2)
+  - mapsted-sdk-loc-marketing (6.1.5):
+    - mapsted-sdk-core (= 6.1.5)
+  - mapsted-sdk-location-share (6.1.5):
+    - mapsted-sdk-core (= 6.1.5)
+  - mapsted-sdk-map (6.1.5):
+    - mapsted-sdk-core (= 6.1.5)
+    - mapsted-sdk-core-map (= 4.4.6.2)
+  - mapsted-sdk-map-ui (6.1.5):
+    - mapsted-sdk-alerts (= 6.1.5)
+    - mapsted-sdk-loc-marketing (= 6.1.5)
+    - mapsted-sdk-location-share (= 6.1.5)
+    - mapsted-sdk-map (= 6.1.5)
+    - mapsted-sdk-topbar-notification (= 6.1.5)
+    - SDWebImage
+  - mapsted-sdk-topbar-notification (6.1.5):
+    - mapsted-sdk-core (= 6.1.5)
+    - mapsted-sdk-location-share (= 6.1.5)
+  - mapsted-sdk-triggers-core (6.1.5):
+    - mapsted-sdk-core (= 6.1.5)
+  - SDWebImage (5.21.0):
+    - SDWebImage/Core (= 5.21.0)
+  - SDWebImage/Core (5.21.0)
+  - SSZipArchive (2.4.3)
+
+DEPENDENCIES:
+  - mapsted-sdk-map (= 6.1.5)
+  - mapsted-sdk-map-ui (= 6.1.5)
+
+SPEC REPOS:
+  https://github.com/Mapsted/podspec:
+    - mapsted-sdk-alerts
+    - mapsted-sdk-core
+    - mapsted-sdk-core-map
+    - mapsted-sdk-loc-marketing
+    - mapsted-sdk-location-share
+    - mapsted-sdk-map
+    - mapsted-sdk-map-ui
+    - mapsted-sdk-topbar-notification
+    - mapsted-sdk-triggers-core
+  trunk:
+    - SDWebImage
+    - SSZipArchive
+
+SPEC CHECKSUMS:
+  mapsted-sdk-alerts: aea14ed8e72fb134e884c7bc315630a2913bb66d
+  mapsted-sdk-core: 82412636b00543501f339c9f1af758a7f24662cb
+  mapsted-sdk-core-map: f9f54c75dc87cc515e05df239242804da3625239
+  mapsted-sdk-loc-marketing: 55863b7de53363c4073745f0c0c918411712ed31
+  mapsted-sdk-location-share: e36563bb000d42a93bb88188b0e029f530c7df74
+  mapsted-sdk-map: fd1ca8e33fd5b75709bfd687b7a5bb4c585d14b9
+  mapsted-sdk-map-ui: 6f74936e76b9fd7e96b40a4789612ab3972226dc
+  mapsted-sdk-topbar-notification: f879f1c43ec8a1d9cbd5d55391668158fed95984
+  mapsted-sdk-triggers-core: 89e2f27ed1bd3e86d28fa700dc971d094bdc921a
+  SDWebImage: f84b0feeb08d2d11e6a9b843cb06d75ebf5b8868
+  SSZipArchive: fe6a26b2a54d5a0890f2567b5cc6de5caa600aef
+
+PODFILE CHECKSUM: e2ba1e40b5156664966ac9dc83ad6a622c9c47b0
+
+COCOAPODS: 1.16.2
