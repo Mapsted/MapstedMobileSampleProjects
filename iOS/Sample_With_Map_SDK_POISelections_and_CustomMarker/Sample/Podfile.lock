@@ -1,0 +1,29 @@
+PODS:
+  - mapsted-sdk-core (6.1.6):
+    - SSZipArchive
+  - mapsted-sdk-core-map (4.4.6.2)
+  - mapsted-sdk-map (6.1.6):
+    - mapsted-sdk-core (= 6.1.6)
+    - mapsted-sdk-core-map (= 4.4.6.2)
+  - SSZipArchive (2.4.3)
+
+DEPENDENCIES:
+  - mapsted-sdk-map (~> 6.1.6)
+
+SPEC REPOS:
+  https://github.com/Mapsted/podspec:
+    - mapsted-sdk-core
+    - mapsted-sdk-core-map
+    - mapsted-sdk-map
+  trunk:
+    - SSZipArchive
+
+SPEC CHECKSUMS:
+  mapsted-sdk-core: a006614af22d3128f2a463444416d50e94f1de77
+  mapsted-sdk-core-map: f9f54c75dc87cc515e05df239242804da3625239
+  mapsted-sdk-map: b810140ce42081bb14d6748d113697457b380004
+  SSZipArchive: fe6a26b2a54d5a0890f2567b5cc6de5caa600aef
+
+PODFILE CHECKSUM: a2c46432102feaf5c7866413e9d31af2b09ade3b
+
+COCOAPODS: 1.16.2
