@@ -14,10 +14,12 @@ class MapViewController : UIViewController {
     
     @IBOutlet weak var spinnerView: UIActivityIndicatorView!
     @IBOutlet weak var mapPlaceholderView: UIView!
-    
+    @IBOutlet weak var overlayBtn: UIButton!
+
     //View controller in charge of map view
     private let mapViewController = MNMapViewController()
     let propertyId = 504
+    let overylayItemId = "6865" // Add overlay id that you want show on map.
     var propertyInfo: PropertyInfo?
     
     //MARK: - View Lifecycle
@@ -29,8 +31,11 @@ class MapViewController : UIViewController {
         MapstedMapApi.shared.useMapOverlays(enable: true)
         MapstedMapMeta.pinImageName = "new_pin"
         
-        //Whether or not you want to show compass
+        // Whether or not you want to show compass
         MapstedMapMeta.showCompass = true
+        
+        // To verify overlayItem, set isHidden to false and update the overlayItemId parameter.
+        overlayBtn.isHidden = true
         
         showSpinner()
         if CoreApi.hasInit() {
@@ -109,8 +114,8 @@ class MapViewController : UIViewController {
     }
     
     @IBAction func selectOverlay(_ sender: Any) {
-        //        let overlayId: String = "6865" // Add overlay id that you want show on map.
-        //        self.selectOverlayById(overlayId: overlayId)
+        let overlayId: String = overylayItemId
+        self.selectOverlayById(overlayId: overlayId)
     }
     
     //Method to programmatically select entity on map and show the custom popup view. In case of the property level entity, which is not on any building, please pass the buildingId as -1. For entity on any building, please pass the valid buildingId.
