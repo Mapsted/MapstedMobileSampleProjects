@@ -3,11 +3,11 @@ package com.mapsted.samplelocshare
 import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatButton
 import androidx.databinding.DataBindingUtil
 import com.mapsted.MapstedBaseApplication
 import com.mapsted.locshare.LocationShareApi
@@ -16,7 +16,6 @@ import com.mapsted.locshare.data.models.location.LiveLocationResponse
 import com.mapsted.map.MapApi
 import com.mapsted.map.MapstedMapApi
 import com.mapsted.map.MapstedMapApiProvider
-import com.mapsted.map.views.MapPanType
 import com.mapsted.positioning.CoreApi
 import com.mapsted.positioning.MapstedCoreApi
 import com.mapsted.positioning.SdkError
@@ -30,6 +29,7 @@ import com.mapsted.ui.MapUiApi
 import com.mapsted.ui.MapUiApi.MapUiInitCallback
 import com.mapsted.ui.MapstedMapUiApi
 import com.mapsted.ui.utils.common.Settings
+
 
 class MainActivity : AppCompatActivity(), MapstedMapApiProvider {
 
@@ -65,13 +65,13 @@ class MainActivity : AppCompatActivity(), MapstedMapApiProvider {
             coreApi, mapUiApi
         )
 
-        binding.startLocationShare.setOnClickListener {
-            startLocationShare()
-        }
-
-        binding.stopLocationShare.setOnClickListener {
-            stopLocationShare()
-        }
+//        binding.startLocationShare.setOnClickListener {
+//            startLocationShare()
+//        }
+//
+//        binding.stopLocationShare.setOnClickListener {
+//            stopLocationShare()
+//        }
 
         // Set up permission checks
         permissionChecks = PermissionChecks(
@@ -87,7 +87,25 @@ class MainActivity : AppCompatActivity(), MapstedMapApiProvider {
         } else {
             checkPermissions()
         }
+    }
 
+    private fun addCustomViewOnMap() {
+        // Create Custom View
+        val myView: View = LayoutInflater.from(this).inflate(R.layout.custom_view_on_map, null, false)
+        val startLocationShareBtn =  myView.findViewById<AppCompatButton>(R.id.start_location_share)
+        val stopLocationShareBtn =  myView.findViewById<AppCompatButton>(R.id.stop_location_share)
+        startLocationShareBtn.setOnClickListener {
+            startLocationShare()
+        }
+        stopLocationShareBtn.setOnClickListener {
+            stopLocationShare()
+        }
+        // Display custom View on the map
+        mapApi.mapView().customView().addViewToMapFragment("my_custom_tag", myView)
+        // Get custom View on the map
+//        val getView = mapApi.mapView().customView().getViewOnMap("my_custom_tag")
+        // Remove custom View from the map
+//        mapApi.mapView().customView().removeViewFromMap("my_custom_tag")
     }
 
     // Permission result callback
@@ -147,6 +165,7 @@ class MainActivity : AppCompatActivity(), MapstedMapApiProvider {
         }
         // Set up required views and visibility
         customParams?.activity = this
+        // When you initialize your SDK, you must provide both containers for the BaseMap and MapUi
         customParams?.setBaseMapContainerView(binding.flBaseMap)
         customParams?.mapUiContainerView = binding.flMapUi
         customParams?.setDefaultMapUiContainerVisibility(false)
@@ -160,21 +179,19 @@ class MainActivity : AppCompatActivity(), MapstedMapApiProvider {
             }
 
             override fun onMapInitialized() {
+                addCustomViewOnMap()
                 Logger.i("onMapInitialized: ")
                 LogTime.getInstance().end(LogTime.LogTimeKey.MAP_SDK_INITIALIZE)
             }
 
             override fun onSuccess() {
                 Log.d("SUCCESS", "Intialized Successfully")
-
                 // After initialization, retrieve property and set up location share SDK
                 coreApi.properties()?.getInfos { propertyInfos ->
                     val numProperties = propertyInfos?.size
                     propertyId = if (numProperties != null && numProperties > 0) propertyInfos.keys.first() else -1;
                     setUpLocShareSDK(coreApi, mapUiApi)
-                    run {
-                        hideProgressDialog()
-                    }
+                    hideProgressDialog()
                 }
             }
 
@@ -200,6 +217,7 @@ class MainActivity : AppCompatActivity(), MapstedMapApiProvider {
             )
             hideProgressDialog()
         }
+
     }
 
     // Trigger live location sharing
