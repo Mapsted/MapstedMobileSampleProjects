@@ -14,8 +14,6 @@ import LocationMarketing
 
 import MapstedComponentsUI
 class MainViewController : UIViewController {
-   
-    
     
     private var containerVC: ContainerViewController?
     private var mapsVC: MapstedMapUiViewController?
@@ -46,6 +44,8 @@ class MainViewController : UIViewController {
 			Logger.Log("MapstedMapApi", "")
             MapstedMapApi.shared.setUp(prefetchProperties: false, callback: self)
         }
+        
+        self.addDownloadPropertyListener()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -54,6 +54,11 @@ class MainViewController : UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+    }
+    
+    //Add listener to receive property download progress callback
+    func addDownloadPropertyListener(){
+        CoreApi.PropertyManager.addPropertyDownloadListener(listener: self)
     }
     
     //MARK: - Intialize and add MapView and display property
@@ -70,20 +75,11 @@ class MainViewController : UIViewController {
         self.handleSuccess()
     }
     
-    func getGeoFenceNotifications() {
-        //Add self
-        CoreApi.GeofenceManager.addListener(self)
-        /**
-         //Remove Listener
-         //LocMarketingApi.shared.removeGeofenceEventListener(listener: self)
-         */
-        
-    }
-    
+    //Helper method to draw property.
     func displayProperty(propertyInfo: PropertyInfo, completion: (() -> ())? = nil) {
         //zoom to property
-            self.mapsVC?.showLoadingSpinner(text: "Loading...")
-            self.spinnerView.stopAnimating()
+        self.mapsVC?.showLoadingSpinner(text: "Loading...")
+        self.spinnerView.stopAnimating()
         
 		let propertyId = propertyInfo.getPropertyId()
         mapsVC?.selectAndDrawProperty(propertyId: propertyId, callback: {[weak self] status in
@@ -127,7 +123,18 @@ class MainViewController : UIViewController {
         else {
             self.Logger.Log("No properties found", "")
         }
-	}
+    }
+    
+    //MARK: - Zoom to user location Methods
+    
+    func zoomToCurrentUserLocation(){
+        //self.mapsVC?.zoomToUserLocation()
+        //Add your custom zoom level
+        if let userLocation = CoreApi.LocationManager.getPosition() {
+            MapstedMapApi.shared.mapView()?.moveToLocation(mercator: userLocation.loc, zoom: 20, duration: 0.2)
+        }
+    }
+    
     
     //MARK: - Utility Methods
     
@@ -156,12 +163,13 @@ class MainViewController : UIViewController {
     //How to search for entities by name from CoreApi
     fileprivate func findEntityByName(name: String, propertyId: Int) {
         let matchedEntities = CoreApi.PropertyManager.findEntityByName(name: name, propertyId: propertyId)
-		self.Logger.Log("Matches ", "\(matchedEntities.count) for \(name) in \(propertyId)")
+        self.Logger.Log("Matches ", "\(matchedEntities.count) for \(name) in \(propertyId)")
         for match in matchedEntities {
-			self.Logger.Log("Match ", "\(match.displayName) = \(match.entityId)")
+            self.Logger.Log("Match ", "\(match.displayName) = \(match.entityId)")
         }
     }
     
+    //This function searches for entities by name within a property and displays the results using an entity chooser if matches are found.
     fileprivate func chooseFromEntities(name: String, propertyId: Int) {
         let matchedEntities = CoreApi.PropertyManager.findEntityByName(name: name, propertyId: propertyId)
         guard !matchedEntities.isEmpty else { return }
@@ -170,7 +178,7 @@ class MainViewController : UIViewController {
 
     }
     
-    
+    //filters and searches POIs by category, logging results and displaying them using an entity chooser.
     fileprivate func searchPOIsWithCategoryFilter(propertyId: Int, categoryId: String) {
         let categoryFilter = PoiFilter.Builder().addFilter(
             PoiIntersectionFilter.Builder()
@@ -296,6 +304,7 @@ class MainViewController : UIViewController {
         
     }
     
+    //Fetches logs categories, including root, parent, ancestor, and descendant categories, and searches for washrooms by name within a given property ID.
     fileprivate func getCategories(propertyId: Int) {
         CoreApi.PropertyManager.getCategories(propertyId: propertyId, callback: { result in
             guard let result = result else {
@@ -383,6 +392,7 @@ class MainViewController : UIViewController {
         }
     }
     
+    //Logs all searchable entities in the given property with their IDs and display names.
     fileprivate func allEntities(propertyId: Int) {
         let entities = CoreApi.PropertyManager.getSearchEntities(propertyId: propertyId)
         for entity in entities {
@@ -390,7 +400,7 @@ class MainViewController : UIViewController {
         }
     }
     
-    
+    //Finds and selects a specific entity (e.g., "Apple") on the map for the given property.
     fileprivate func selectEntities(propertyId: Int) {
         let entities = CoreApi.PropertyManager.findEntityByName(name: "Apple", propertyId: propertyId)
         if let firstMatch = entities.first {
@@ -404,6 +414,8 @@ class MainViewController : UIViewController {
         }
          */
     }
+    
+    //Finds a starting entity by name and makes a multi-destination route request using random destinations within the same property.
     fileprivate func makeRouteRequests(propertyId: Int) {
         let entities = CoreApi.PropertyManager.findEntityByName(name: "Appl", propertyId: propertyId)
         let otherEntities = CoreApi.PropertyManager.getSearchEntities(propertyId: propertyId)
@@ -421,6 +433,7 @@ class MainViewController : UIViewController {
         
     }
     
+    //Builds and sends a route request with given start point, destinations, and route preferences.
     fileprivate func makeRouteRequest(start: ISearchable?, fromCurrentLocation: Bool, destinations: [ISearchable]) {
         let optimizedRoute = true
         let useStairs = false
@@ -437,7 +450,7 @@ class MainViewController : UIViewController {
         let pois = destinations.compactMap({$0 as? MNSearchEntity})
         
                 
-            //Build a route request
+        //Build a route request
         var routeRequest: MNRouteRequest?
         routeRequest = MNRouteRequest(routeOptions: routeOptions,
                                       destinations:pois,
@@ -446,7 +459,7 @@ class MainViewController : UIViewController {
         
         if let routeRequest = routeRequest {
             
-                //@Daniel: Let's put this in async queue
+            //@Daniel: Let's put this in async queue
             DispatchQueue.global(qos: .userInteractive).async {
                 CoreApi.RoutingManager.requestRoute(request: routeRequest, routingRequestCallback: self)
             }
@@ -456,6 +469,8 @@ class MainViewController : UIViewController {
 
 //MARK: - Core Init Callback methods
 extension MainViewController : CoreInitCallback {
+    
+    //Called when the Map API setup is successful, initializes and displays the map view.
     func onSuccess() {
         //Once the Map API Setup is complete, Setup the Mapview
         DispatchQueue.main.async {
@@ -464,14 +479,17 @@ extension MainViewController : CoreInitCallback {
         }
     }
     
+    //Called when the Map API setup fails
     func onFailure(errorCode: EnumSdkError) {
 		self.Logger.Log("Failed with", errorCode)
     }
     
+    //Called when there is a status update from the SDK
     func onStatusUpdate(update: EnumSdkUpdate) {
 		self.Logger.Log("OnStatusUpdate", update)
     }
     
+    //Called when a status message is received from the SDK
     func onStatusMessage(messageType: StatusMessageType) {
         
     }
@@ -479,18 +497,23 @@ extension MainViewController : CoreInitCallback {
 
 //MARK: - Routing Request Callback methods
 extension MainViewController: RoutingRequestCallback {
+    
+    //Called when the route is successfully generated and forwards the response to the map API.
     func onSuccess(routeResponse: MNRouteResponse) {
         MapstedMapApi.shared.handleRouteResponse(routeResponse: routeResponse)
     }
     
+    //Called when there's an error generating the route and forwards the error details to the map API.
     func onError(errorCode: Int, errorMessage: String, alertIds: [String]) {
         MapstedMapApi.shared.handleRouteError(errorCode: errorCode, errorMessage: errorMessage, alertIds: alertIds)
     }
     
     
 }
-
+//MARK: - Geofence Event delegate
 extension MainViewController: GeofenceEventListener {
+    
+    //Called when a geofence event is triggered for a specific property.
     func onGeofenceEvent(propertyId: Int, triggerId: String) {
         self.Logger.Log("Go GeofenceEvent for", "\(propertyId) with Trigger: \(triggerId)")
     }
@@ -505,9 +528,26 @@ extension MainViewController : MNAlertDelegate {
         return false
     }
 }
+
 extension MainViewController : CategorySelectionDelegate{
+    
+    //Called when a category is selected by the user.
     func selectedCategory(category: MapstedCore.MNCategory) {
         print("Selected Category:\(category)")
     }
 }
 
+// MARK: - Property Download Delegate
+extension MainViewController: PropertyAutoDownloadListener {
+    
+    //Called when the property download completes successfully.
+    func onSuccess(propertyId: Int) {
+        print("Download Succesfully")
+    }
+    
+    //Called periodically to indicate download progress of a property.
+    func onProgress(propertyId: Int, percentage: Float) {
+        print("Downloading property -- \(propertyId)... \(percentage)% ")
+    }
+    
+}
