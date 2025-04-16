@@ -49,7 +49,27 @@ class LocSimulationMainViewController : UIViewController {
         
         spinnerView.startAnimating()
 
-        //Code to enable the location simulation mode and provide the simulator path and walking speed
+        //self.setLocationSimulationForEntity()
+
+        //Initialize the SDK if it is not initialized already.
+        if CoreApi.hasInit() {
+            handleSuccess()
+        }
+        else {
+            MapstedMapApi.shared.setUp(prefetchProperties: false, callback: self)
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+    }
+    
+    //Code to enable the location simulation mode and provide the simulator path and walking speed
+    func setLocationSimulationForEntity(){
         let userPath = self.getLocationSimulatorPath(simulatorPath: simulatorPath)
         MNSettingUtils.shared.setLocationSimulationDetails(speed: simulatorWalkSpeedModifier, Userpath: userPath) { status in
             if status {
@@ -71,24 +91,7 @@ class LocSimulationMainViewController : UIViewController {
                 
             }
         }
-
-        //Initialize the SDK if it is not initialized already.
-        if CoreApi.hasInit() {
-            handleSuccess()
-        }
-        else {
-            MapstedMapApi.shared.setUp(prefetchProperties: false, callback: self)
-        }
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-    }
-    
     //MARK: - Intialize and add MapView and display property
     
     func addMapView() {
