@@ -1,0 +1,36 @@
+PODS:
+  - mapsted-sdk-core (6.1.6):
+    - SSZipArchive
+  - mapsted-sdk-loc-marketing (6.1.6):
+    - mapsted-sdk-core (= 6.1.6)
+  - mapsted-sdk-triggers-core (6.1.6):
+    - mapsted-sdk-core (= 6.1.6)
+  - SDWebImage (5.21.0):
+    - SDWebImage/Core (= 5.21.0)
+  - SDWebImage/Core (5.21.0)
+  - SSZipArchive (2.4.3)
+
+DEPENDENCIES:
+  - mapsted-sdk-loc-marketing (~> 6.1.6)
+  - mapsted-sdk-triggers-core (~> 6.1.6)
+  - SDWebImage
+
+SPEC REPOS:
+  https://github.com/Mapsted/podspec:
+    - mapsted-sdk-core
+    - mapsted-sdk-loc-marketing
+    - mapsted-sdk-triggers-core
+  trunk:
+    - SDWebImage
+    - SSZipArchive
+
+SPEC CHECKSUMS:
+  mapsted-sdk-core: a006614af22d3128f2a463444416d50e94f1de77
+  mapsted-sdk-loc-marketing: 30eda5a31fe741f80e12085a8fd8666f827b85f5
+  mapsted-sdk-triggers-core: e2294bec12ce4929dc92eb31554c01f1a4da29a7
+  SDWebImage: f84b0feeb08d2d11e6a9b843cb06d75ebf5b8868
+  SSZipArchive: fe6a26b2a54d5a0890f2567b5cc6de5caa600aef
+
+PODFILE CHECKSUM: 779601c98722a9a68c2ee9be2b4a22252400e84d
+
+COCOAPODS: 1.16.2
