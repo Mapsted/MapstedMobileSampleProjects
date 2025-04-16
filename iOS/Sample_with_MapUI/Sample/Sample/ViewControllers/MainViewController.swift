@@ -169,7 +169,7 @@ class MainViewController : UIViewController {
         }
     }
     
-    //This function searches for entities by name within a property and displays the results using an entity chooser if matches are found.
+    //This function searches for entities by name within a property and displays the results if matches are found.
     fileprivate func chooseFromEntities(name: String, propertyId: Int) {
         let matchedEntities = CoreApi.PropertyManager.findEntityByName(name: name, propertyId: propertyId)
         guard !matchedEntities.isEmpty else { return }
@@ -178,7 +178,7 @@ class MainViewController : UIViewController {
 
     }
     
-    //filters and searches POIs by category, logging results and displaying them using an entity chooser.
+    //filters and searches POIs by category, logging results and displaying them.
     fileprivate func searchPOIsWithCategoryFilter(propertyId: Int, categoryId: String) {
         let categoryFilter = PoiFilter.Builder().addFilter(
             PoiIntersectionFilter.Builder()
@@ -459,7 +459,6 @@ class MainViewController : UIViewController {
         
         if let routeRequest = routeRequest {
             
-            //@Daniel: Let's put this in async queue
             DispatchQueue.global(qos: .userInteractive).async {
                 CoreApi.RoutingManager.requestRoute(request: routeRequest, routingRequestCallback: self)
             }
