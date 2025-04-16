@@ -48,29 +48,9 @@ class LocSimulationMainViewController : UIViewController {
         super.viewDidLoad()
         
         spinnerView.startAnimating()
-        
-        //Code to enable the location simulation mode and provide the simulator path and walking speed
-        let userPath = self.getLocationSimulatorPath(simulatorPath: simulatorPath)
-        MNSettingUtils.shared.setLocationSimulationDetails(speed: simulatorWalkSpeedModifier, Userpath: userPath) { status in
-            if status {
-                print("#Simulator Mode set successfully")
-                var destinationName = ""
-                switch simulatorPath {
-                case .LevelOne_LevelTwo_ToFootLocker:
-                    destinationName = "Foot Locker"
-                    break
-                case .LevelOne_ToFido:
-                    destinationName = "Fido"
-                    break
-                }
-                
-                if destinationName != "" {
-                    self.showToast(message: "To test routing, please request a route to: \(destinationName)", delayInSec: 5.0, duration: 5.0, preferredStyle: .alert)
-                }
-                
-                
-            }
-        }
+
+        //self.setLocationSimulationForEntity()
+
         //Initialize the SDK if it is not initialized already.
         if CoreApi.hasInit() {
             handleSuccess()
