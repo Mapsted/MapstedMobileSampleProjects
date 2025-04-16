@@ -10,8 +10,6 @@ import UIKit
 import MapstedCore
 import MapstedMap
 import MapstedMapUi
-import LocationMarketing
-import MapKit
 import MapstedGeofence
 
 enum SimulatorPath {
@@ -105,6 +103,7 @@ class LocSimulationMainViewController : UIViewController {
         self.handleSuccess()
     }
     
+    //Helper method to draw property.
     func displayProperty(propertyInfo: PropertyInfo, completion: (() -> ())? = nil) {
         //zoom to property
             self.mapsVC?.showLoadingSpinner(text: "Loading...")
@@ -145,6 +144,7 @@ class LocSimulationMainViewController : UIViewController {
 //MARK: - Location Simulator Methods
 extension LocSimulationMainViewController {
     
+    // Used to show alert message
     func showToast(message: String, delayInSec: Double = 0.0, duration: Double, preferredStyle: UIAlertController.Style) {
         DispatchQueue.main.asyncAfter(deadline: .now() + delayInSec) {
             let alert = UIAlertController(title: nil, message: message, preferredStyle: preferredStyle)
@@ -156,6 +156,7 @@ extension LocSimulationMainViewController {
         }
     }
 
+    //Returns an array of simulation path coordinates based on the selected simulator path enum.
     func getLocationSimulatorPath(simulatorPath: SimulatorPath) -> [MNMercatorZone] {
         switch (simulatorPath) {
             case .LevelOne_ToFido:
@@ -165,6 +166,7 @@ extension LocSimulationMainViewController {
         }
     }
 
+    // Entity-Fido simulatorPath
     func getLocationSimulatorPath_LevelOne_ToFido() -> [MNMercatorZone] {
         let levelOneLatLngs: [LatLong] = [
             LatLong(lat: 43.59270591410157, long: -79.64468396358342),
@@ -187,6 +189,7 @@ extension LocSimulationMainViewController {
         return simulatorPath;
     }
 
+    // Entity-FootLocker simulatorPath
     func getLocationSimulatorPath_LevelOne_LevelTwo_ToFootLocker() -> [MNMercatorZone] {
         let levelOneLatLngs: [LatLong] = [
             LatLong(lat: 43.59270506141888, long: -79.64467918464558),
@@ -221,6 +224,8 @@ extension LocSimulationMainViewController {
 
 //MARK: - Core Init Callback methods
 extension LocSimulationMainViewController : CoreInitCallback {
+    
+    //Called when the Map API setup is successful, initializes and displays the map view.
     func onSuccess() {
         //Once the Map API Setup is complete, Setup the Mapview
         DispatchQueue.main.async {
@@ -228,14 +233,17 @@ extension LocSimulationMainViewController : CoreInitCallback {
         }
     }
     
+    //Called when the Map API setup fails
     func onStatusUpdate(update: EnumSdkUpdate) {
         print("OnStatusUpdate: \(update)")
     }
     
+    //Called when there is a status update from the SDK
     func onFailure(errorCode: EnumSdkError) {
         print("Failed with \(errorCode)")
     }
     
+    //Called when a status message is received from the SDK
     func onStatusMessage(messageType: StatusMessageType) {
         print("On StatusMessage: \(messageType)")
     }
@@ -252,6 +260,8 @@ extension LocSimulationMainViewController : MNAlertDelegate {
 }
 
 extension LocSimulationMainViewController {
+    
+    //Adds multiple geofence triggers for entity, property, building, and floor entry/exit events.
     func addGeoFenceTriggers() {
         
         let propertyId = 504
@@ -283,14 +293,16 @@ extension LocSimulationMainViewController {
         let _ = MapstedGeofence.GeofenceManager.shared.addGeofenceTriggers(propertyId: propertyId, geofenceTriggers: self.arrGeoTriggers)
     }
     
+    //Removes a specific geofence trigger using the property and geofence ID.
     func removeGeofenceTrigger(propertyId: Int, geofenceId: String) -> Bool {
         return MapstedGeofence.GeofenceManager.shared.removeGeofenceTrigger(propertyId: propertyId, geofenceId: geofenceId)
     }
     
+    //Removes all geofence triggers for the given property.
     func removeAllGeofenceTriggers(propertyId: Int) -> Bool {
         return MapstedGeofence.GeofenceManager.shared.removeAllGeofenceTriggers(propertyId: propertyId)
     }
-    
+    //Handles geofence trigger callbacks and shows appropriate alert based on geofence ID.
     func handleGeofence(propertyId: Int, geofenceId: String) {
         DispatchQueue.main.async {
             var alertTitle: String? = ""
@@ -340,12 +352,12 @@ extension LocSimulationMainViewController {
     }
 }
 
-
-
+//MARK: - Geofence Delegate
 extension LocSimulationMainViewController : GeofenceCallback {
+    
+    //Called when a geofence is triggered; forwards the event to the handler method.
     func onGeofenceTriggered(propertyId: Int, geofenceId: String) {
         self.handleGeofence(propertyId: propertyId, geofenceId: geofenceId)
     }
-    
     
 }
