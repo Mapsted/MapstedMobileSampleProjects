@@ -53,7 +53,7 @@
          </BuildableReference>
       </BuildableProductRunnable>
       <LocationScenarioReference
-         identifier = "../../../Sample_with_MapUI_LocationShare/Sample/GPX/SquareOne.gpx"
+         identifier = "../../../../Release repo/ios-mall-mapp/Gpx/SquareOne.gpx"
          referenceType = "0">
       </LocationScenarioReference>
    </LaunchAction>

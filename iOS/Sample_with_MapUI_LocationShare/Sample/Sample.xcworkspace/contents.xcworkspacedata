@@ -2,7 +2,7 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:../../Sample_with_MapUI_LocationShare/Sample/GPX/SquareOne.gpx">
+      location = "group:../../../Release repo/ios-mall-mapp/Gpx/SquareOne.gpx">
    </FileRef>
    <FileRef
       location = "group:Sample.xcodeproj">
