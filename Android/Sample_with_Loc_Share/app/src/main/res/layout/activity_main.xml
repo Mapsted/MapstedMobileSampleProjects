@@ -18,6 +18,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
+
             <FrameLayout
                 android:id="@+id/fl_base_map"
                 android:layout_width="match_parent"
@@ -29,6 +30,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:visibility="visible"/>
+
+
+            <FrameLayout
+                android:background="@color/transparent"
+                android:id="@+id/app_template_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:measureAllChildren="true"
+                android:orientation="vertical"
+                tools:ignore="MissingConstraints"/>
 
         </RelativeLayout>
 

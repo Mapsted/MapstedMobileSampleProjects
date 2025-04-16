@@ -74,7 +74,13 @@ class MainActivity : AppCompatActivity(), LocationMarketingApi.LocationMarketing
         propertyList.add(propertyDetails)
     }
 
-    // Listen for changes in nearby properties
+    /**
+     * Registers a listener to monitor nearby property changes.
+     *
+     * - When new properties are detected (`onAdded`), they are added to the list and displayed.
+     * - When properties are no longer nearby (`onRemoved`), they are removed from the list and UI.
+     * - UI is updated accordingly to reflect changes in nearby properties.
+     */
     private fun addNearByPropertyListener() {
         coreApi!!.locations()
             .addNearbyPropertyChangeListener(object : NearbyPropertiesChangedListener {
@@ -110,17 +116,6 @@ class MainActivity : AppCompatActivity(), LocationMarketingApi.LocationMarketing
         }
     }
 
-    // Lazy initialization of the in-app notifications API
-    private fun getInAppNotificationApi(): InAppNotificationsApi {
-        Logger.d("getInAppNotificationApi:  ")
-        if (_inAppNotificationApi == null) {
-            val fragmentContainerView = binding.inAppNotificationsContainer
-            _inAppNotificationApi =
-                MapstedInAppNotificationsApi(supportFragmentManager, fragmentContainerView)
-        }
-        return _inAppNotificationApi!!
-    }
-
     // Set up location marketing SDK
     private fun setupLocMarketingSdk(coreApi: CoreApi) {
 
@@ -132,6 +127,17 @@ class MainActivity : AppCompatActivity(), LocationMarketingApi.LocationMarketing
             this
         )
         marketingApi?.setup()?.initialize()
+    }
+
+    //  initialization of the in-app notifications API
+    private fun getInAppNotificationApi(): InAppNotificationsApi {
+        Logger.d("getInAppNotificationApi:  ")
+        if (_inAppNotificationApi == null) {
+            val fragmentContainerView = binding.inAppNotificationsContainer
+            _inAppNotificationApi =
+                MapstedInAppNotificationsApi(supportFragmentManager, fragmentContainerView)
+        }
+        return _inAppNotificationApi!!
     }
 
     // Show or hide progress bar
