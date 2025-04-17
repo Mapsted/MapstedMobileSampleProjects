@@ -37,7 +37,6 @@
 		001C4A7429A8B57D006B956A /* Sample_Geofence.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sample_Geofence.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		001C4A7629A8B713006B956A /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		001C4A7829A8B7B3006B956A /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
-		001C4A7A29A8BC8B006B956A /* Sample_LocSimulation-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Sample_LocSimulation-Info.plist"; sourceTree = "<group>"; };
 		0048631B2B5F9CA000FF9288 /* GeoFenceUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeoFenceUtility.swift; sourceTree = "<group>"; };
 		470589AEE9CC7A98ECAD8A1E /* Pods-Sample_Geofence.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sample_Geofence.release.xcconfig"; path = "Target Support Files/Pods-Sample_Geofence/Pods-Sample_Geofence.release.xcconfig"; sourceTree = "<group>"; };
 		65A8FFE226F183F900B21A69 /* ios_licence.key */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_licence.key; sourceTree = "<group>"; };
@@ -105,7 +104,6 @@
 			isa = PBXGroup;
 			children = (
 				0048631A2B5F9C8C00FF9288 /* Utility */,
-				001C4A7A29A8BC8B006B956A /* Sample_LocSimulation-Info.plist */,
 				E10C3B75234523AC00FF60B8 /* Resources */,
 				E169A740232A8DD900BF41AB /* ViewControllers */,
 				C047C899228B1A8B00E376D0 /* AppDelegate.swift */,
@@ -310,7 +308,7 @@
 				DEVELOPMENT_TEAM = 6YU4WVH5YQ;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
-				INFOPLIST_FILE = "$(SRCROOT)/Sample/Sample_LocSimulation-Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Sample/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -337,7 +335,7 @@
 				DEVELOPMENT_TEAM = 6YU4WVH5YQ;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
-				INFOPLIST_FILE = "$(SRCROOT)/Sample/Sample_LocSimulation-Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Sample/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
