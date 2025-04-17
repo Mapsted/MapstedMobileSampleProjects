@@ -1,4 +1,4 @@
-package com.mapsted.samplewithgeofence
+package com.mapsted.samplegeofence
 
 import org.junit.Test
 

@@ -60,8 +60,8 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
 
     // Mapsted
-    implementation(libs.sdk.loc.share)
     implementation(libs.sdk.core)
+    implementation(libs.sdk.geofence)
     implementation(libs.sdk.map.ui)
     implementation(libs.sdk.map)
 }
