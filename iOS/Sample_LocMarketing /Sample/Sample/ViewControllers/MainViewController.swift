@@ -10,6 +10,7 @@ import UIKit
 import MapstedCore
 import LocationMarketing
 import MapstedTriggersCore
+import SafariServices
 
 class MainViewController : UIViewController {
    
@@ -165,7 +166,7 @@ extension MainViewController: MapstedNotificationDelegate,LocMarketingListener {
     
     //It will trigger when notification contains website
     func openWebsite(websiteURL: String) -> Bool {
-        print("open websiteURL",websiteURL)
+        openURLInSafariVC(from: self, urlString:websiteURL)
         return true
     }
     
@@ -179,4 +180,16 @@ extension MainViewController: MapstedNotificationDelegate,LocMarketingListener {
         print("Dismiss Notification")
     }
     
+
+    func openURLInSafariVC(from viewController: UIViewController, urlString: String) {
+        guard let url = URL(string: urlString) else {
+            print("Invalid URL string: \(urlString)")
+            return
+        }
+
+        let safariVC = SFSafariViewController(url: url)
+        safariVC.preferredControlTintColor = .systemBlue // Optional: change button color
+        viewController.present(safariVC, animated: true, completion: nil)
+    }
+
 }

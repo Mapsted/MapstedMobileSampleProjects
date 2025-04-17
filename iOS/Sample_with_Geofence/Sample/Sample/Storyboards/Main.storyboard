@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="k8O-rl-MHF">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -24,10 +23,10 @@
             </objects>
             <point key="canvasLocation" x="4488" y="708"/>
         </scene>
-        <!--Loc Simulation Main View Controller-->
+        <!--Main View Controller-->
         <scene sceneID="1lY-di-96T">
             <objects>
-                <viewController id="eha-OJ-IOy" customClass="LocSimulationMainViewController" customModule="Sample_LocSimulation" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="eha-OJ-IOy" customClass="MainViewController" customModule="Sample_LocSimulation" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="vMc-KR-idq">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

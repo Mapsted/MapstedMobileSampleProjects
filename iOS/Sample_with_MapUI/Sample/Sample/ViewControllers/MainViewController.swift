@@ -128,7 +128,6 @@ class MainViewController : UIViewController {
     //MARK: - Zoom to user location Methods
     
     func zoomToCurrentUserLocation(){
-        //self.mapsVC?.zoomToUserLocation()
         //Add your custom zoom level
         if let userLocation = CoreApi.LocationManager.getPosition() {
             MapstedMapApi.shared.mapView()?.moveToLocation(mercator: userLocation.loc, zoom: 20, duration: 0.2)

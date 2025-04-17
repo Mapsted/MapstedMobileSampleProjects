@@ -7,7 +7,7 @@ source 'https://github.com/Mapsted/podspec.git'
 
 use_frameworks!
 
-target 'Sample_LocSimulation' do
+target 'Sample_Geofence' do
   pod 'mapsted-sdk-map-ui', '~> 6.1.6'
   pod 'mapsted-sdk-geofence', '~> 6.1.6'
 end
