@@ -13,6 +13,7 @@ import com.mapsted.MapstedBaseApplication
 import com.mapsted.inapp_notification.InAppNotification
 import com.mapsted.inapp_notification.InAppNotificationsApi
 import com.mapsted.inapp_notification.MapstedInAppNotificationsApi
+import com.mapsted.locmarketing.CampaignNotification
 import com.mapsted.locmarketing.LocationMarketingApi
 import com.mapsted.locmarketing.MapstedLocationMarketingApi
 import com.mapsted.locmarketing.model.HomeEntity
@@ -177,8 +178,11 @@ class MainActivity : AppCompatActivity(), LocationMarketingApi.LocationMarketing
 
     }
 
-    override fun inAppNotificationClicked(p0: InAppNotification?) {
-
+    override fun inAppNotificationClicked(inAppNotification: InAppNotification?) {
+        if (inAppNotification is CampaignNotification && inAppNotification.campaign.homeEntities.isNotEmpty()) {
+            val entity = inAppNotification.campaign.homeEntities
+            // Perform actions on the entities from the notification, such as logging analytics data or redirecting to the map
+        }
     }
 
 
