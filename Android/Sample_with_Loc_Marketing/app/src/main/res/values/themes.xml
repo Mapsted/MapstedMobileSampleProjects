@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.SampleLocMarketing" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <!-- Customize your theme here. -->
+    </style>
+    <!--    <style name="Theme.SampleLocShare" parent="Theme.AppCompat.Light.NoActionBar" />-->
+
+    <style name="ButtonExit" parent="RoundedButtonRedWhiteText">
+        <item name="android:text">@string/exit</item>
+    </style>
+
+    <style name="RoundedButtonRedWhiteText" parent="ButtonRedWhiteText">
+        <item name="android:background">@drawable/btn_rounded</item>
+    </style>
+
+    <style name="ButtonRedWhiteText" parent="TextAppearance.Button3">
+        <item name="android:background">@drawable/btn_small_rounded</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:backgroundTint">@color/red</item>
+    </style>
+
+
+</resources>

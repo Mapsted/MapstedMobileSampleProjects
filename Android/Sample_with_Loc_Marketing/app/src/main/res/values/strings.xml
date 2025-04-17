@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">SampleLocMarketing</string>
+    <string name="home">Home</string>
+    <string name="optimizing_the_app_for_the_new_configurations">Optimizing the app for the new configurations</string>
+    <string name="err_no_connection_try_again">No network connection available, please try again later.</string>
+    <string name="fetching_properties">Fetching Properties...</string>
+    <string name="exit">Exit</string>
+
+</resources>
