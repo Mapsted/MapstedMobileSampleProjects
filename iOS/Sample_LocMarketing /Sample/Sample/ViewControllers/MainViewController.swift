@@ -180,7 +180,7 @@ extension MainViewController: MapstedNotificationDelegate,LocMarketingListener {
         print("Dismiss Notification")
     }
     
-
+    //Opens the given URL in a Safari browser view
     func openURLInSafariVC(from viewController: UIViewController, urlString: String) {
         guard let url = URL(string: urlString) else {
             print("Invalid URL string: \(urlString)")
