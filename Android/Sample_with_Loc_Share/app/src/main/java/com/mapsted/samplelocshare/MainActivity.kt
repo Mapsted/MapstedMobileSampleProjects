@@ -168,7 +168,7 @@ class MainActivity : AppCompatActivity(), MapstedMapApiProvider, MapstedMapUiApi
         }
         // Set up required views and visibility
         customParams?.activity = this
-        // When you initialize your SDK, you must provide both containers for the BaseMap and MapUi
+       // When we initialize the SDK, we must provide both containers for the BaseMap and MapUi
         customParams?.setBaseMapContainerView(binding.flBaseMap)
         customParams?.mapUiContainerView = binding.flMapUi
         customParams?.setDefaultMapUiContainerVisibility(true)
@@ -263,7 +263,6 @@ class MainActivity : AppCompatActivity(), MapstedMapApiProvider, MapstedMapUiApi
     }
 
     // This methods will return the link to the user location via implicit intent
-    /*TODO This logic should be moved into location share sdk*/
     private fun launchLocationShareIntent(shareURL: String?) {
         val sb = java.lang.StringBuilder()
         sb.append(shareURL)
