@@ -84,7 +84,6 @@ class MainActivity : AppCompatActivity() , MapstedMapApiProvider, MapstedMapUiAp
 
     // Initialize Mapsted Map UI SDK
     fun intilizeMapUiSdk() {
-
         if (customParams == null)
             customParams = getCustomParams(this)
 
@@ -114,7 +113,6 @@ class MainActivity : AppCompatActivity() , MapstedMapApiProvider, MapstedMapUiAp
             }
 
             override fun onSuccess() {
-//                addCustomViewOnMap()
                 Log.d("SUCCESS", "Intialized Successfully")
                 hideProgressDialog()
                 intializeGeofenceSDK()
@@ -353,6 +351,7 @@ class MainActivity : AppCompatActivity() , MapstedMapApiProvider, MapstedMapUiAp
         return mapApi
     }
 
+    // MapstedMapUiApi Provider implementation
     override fun provideMapstedUiApi(): MapUiApi {
         return mapUiApi
     }
