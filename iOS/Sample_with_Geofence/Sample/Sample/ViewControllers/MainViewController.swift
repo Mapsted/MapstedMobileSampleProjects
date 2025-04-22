@@ -1,5 +1,5 @@
 //
-//  LocSimulationMainViewController.swift
+//  MainViewController.swift
 //  Demo
 //
 //  Created by Mapsted on 2019-09-12.
@@ -22,7 +22,7 @@ struct LatLong {
     var long: Double
 }
 
-class LocSimulationMainViewController : UIViewController {
+class MainViewController : UIViewController {
 
     private var containerVC: ContainerViewController?
     private var mapsVC: MapstedMapUiViewController?
@@ -48,29 +48,7 @@ class LocSimulationMainViewController : UIViewController {
         super.viewDidLoad()
         
         spinnerView.startAnimating()
-        
-        //Code to enable the location simulation mode and provide the simulator path and walking speed
-        let userPath = self.getLocationSimulatorPath(simulatorPath: simulatorPath)
-        MNSettingUtils.shared.setLocationSimulationDetails(speed: simulatorWalkSpeedModifier, Userpath: userPath) { status in
-            if status {
-                print("#Simulator Mode set successfully")
-                var destinationName = ""
-                switch simulatorPath {
-                case .LevelOne_LevelTwo_ToFootLocker:
-                    destinationName = "Foot Locker"
-                    break
-                case .LevelOne_ToFido:
-                    destinationName = "Fido"
-                    break
-                }
-                
-                if destinationName != "" {
-                    self.showToast(message: "To test routing, please request a route to: \(destinationName)", delayInSec: 5.0, duration: 5.0, preferredStyle: .alert)
-                }
-                
-                
-            }
-        }
+
         //Initialize the SDK if it is not initialized already.
         if CoreApi.hasInit() {
             handleSuccess()
@@ -141,7 +119,7 @@ class LocSimulationMainViewController : UIViewController {
 }
 
 //MARK: - Location Simulator Methods
-extension LocSimulationMainViewController {
+extension MainViewController {
     
     // Used to show alert message
     func showToast(message: String, delayInSec: Double = 0.0, duration: Double, preferredStyle: UIAlertController.Style) {
@@ -222,7 +200,7 @@ extension LocSimulationMainViewController {
 }
 
 //MARK: - Core Init Callback methods
-extension LocSimulationMainViewController : CoreInitCallback {
+extension MainViewController : CoreInitCallback {
     
     //Called when the Map API setup is successful, initializes and displays the map view.
     func onSuccess() {
@@ -249,7 +227,7 @@ extension LocSimulationMainViewController : CoreInitCallback {
 }
 
 //MARK: - MN Alert Delegate methods
-extension LocSimulationMainViewController : MNAlertDelegate {
+extension MainViewController : MNAlertDelegate {
     func showAlerts() {
     }
     
@@ -258,7 +236,7 @@ extension LocSimulationMainViewController : MNAlertDelegate {
     }
 }
 
-extension LocSimulationMainViewController {
+extension MainViewController {
     
     //Adds multiple geofence triggers for entity, property, building, and floor entry/exit events.
     func addGeoFenceTriggers() {
@@ -352,7 +330,7 @@ extension LocSimulationMainViewController {
 }
 
 //MARK: - Geofence Delegate
-extension LocSimulationMainViewController : GeofenceCallback {
+extension MainViewController : GeofenceCallback {
     
     //Called when a geofence is triggered; forwards the event to the handler method.
     func onGeofenceTriggered(propertyId: Int, geofenceId: String) {

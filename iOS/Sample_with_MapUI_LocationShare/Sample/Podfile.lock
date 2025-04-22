@@ -4,8 +4,6 @@ PODS:
   - mapsted-sdk-core (6.1.6):
     - SSZipArchive
   - mapsted-sdk-core-map (4.4.6.2)
-  - mapsted-sdk-geofence (6.1.6):
-    - mapsted-sdk-core (= 6.1.6)
   - mapsted-sdk-loc-marketing (6.1.6):
     - mapsted-sdk-core (= 6.1.6)
   - mapsted-sdk-location-share (6.1.6):
@@ -31,7 +29,6 @@ PODS:
   - SSZipArchive (2.4.3)
 
 DEPENDENCIES:
-  - mapsted-sdk-geofence (~> 6.1.6)
   - mapsted-sdk-map-ui (~> 6.1.6)
 
 SPEC REPOS:
@@ -39,7 +36,6 @@ SPEC REPOS:
     - mapsted-sdk-alerts
     - mapsted-sdk-core
     - mapsted-sdk-core-map
-    - mapsted-sdk-geofence
     - mapsted-sdk-loc-marketing
     - mapsted-sdk-location-share
     - mapsted-sdk-map
@@ -54,7 +50,6 @@ SPEC CHECKSUMS:
   mapsted-sdk-alerts: 32c69349f59688a0a1b5afc62788e447e9480a97
   mapsted-sdk-core: a006614af22d3128f2a463444416d50e94f1de77
   mapsted-sdk-core-map: f9f54c75dc87cc515e05df239242804da3625239
-  mapsted-sdk-geofence: fd54c78e20c5ef0de553125717e422468d3775cf
   mapsted-sdk-loc-marketing: 30eda5a31fe741f80e12085a8fd8666f827b85f5
   mapsted-sdk-location-share: acfc82c7147f691903d0756e30141146ccf1bd79
   mapsted-sdk-map: b810140ce42081bb14d6748d113697457b380004
@@ -64,6 +59,6 @@ SPEC CHECKSUMS:
   SDWebImage: f84b0feeb08d2d11e6a9b843cb06d75ebf5b8868
   SSZipArchive: fe6a26b2a54d5a0890f2567b5cc6de5caa600aef
 
-PODFILE CHECKSUM: 2a56e2826dc7ac8fe7accbf99c05de3b88b4a750
+PODFILE CHECKSUM: 79711aeabb80d0bd8de05989c25aa0f0862fc95b
 
 COCOAPODS: 1.16.2

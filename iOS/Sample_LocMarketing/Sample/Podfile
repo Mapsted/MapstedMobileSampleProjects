@@ -1,0 +1,15 @@
+# Uncomment the next line to define a global platform for your project
+platform :ios, '13.0'
+
+source 'https://cdn.cocoapods.org/'
+source 'https://github.com/Mapsted/podspec.git'
+
+
+use_frameworks!
+
+target 'Sample' do
+  pod 'mapsted-sdk-loc-marketing', '~> 6.1.6'
+  pod 'mapsted-sdk-triggers-core', '~> 6.1.6'
+  pod 'SDWebImage'
+end
+
