@@ -15,8 +15,8 @@ import MapstedLocationShare
 class MainViewController : UIViewController {
     
     @IBOutlet weak var spinnerView: UIActivityIndicatorView!
-    @IBOutlet weak var locationShareBtn: UIButton!
     
+    var shareMyLocationBtn = UIButton(type: .system)
     private var containerVC: ContainerViewController?
     private var mapsVC: MapstedMapUiViewController?
         
@@ -85,6 +85,7 @@ class MainViewController : UIViewController {
                 self?.mapsVC?.hideLoadingSpinner()
                 if status {
                     self?.mapsVC?.displayPropertyOnMap {
+                        self?.addButtonOnTopOfMap()
                         completion?()
                     }
                 }
@@ -124,10 +125,10 @@ class MainViewController : UIViewController {
     @IBAction func startAndStopLocationToggle(_ sender: Any) {
         if isLocationShareEnable {
             self.stopLocationSharing()
-            self.locationShareBtn.setTitle("Start Location Share", for: .normal)
+            self.shareMyLocationBtn.setTitle("Start Location Share", for: .normal)
         } else {
             self.startLocationSharing()
-            self.locationShareBtn.setTitle("Stop Location Share", for: .normal)
+            self.shareMyLocationBtn.setTitle("Stop Location Share", for: .normal)
         }
         isLocationShareEnable = !isLocationShareEnable
     }
@@ -141,6 +142,36 @@ class MainViewController : UIViewController {
 
 extension MainViewController{
     
+    //Add custom button on top of map view - Available in sdk version - 6.1.8
+    func addButtonOnTopOfMap(){
+        
+        // Create the button
+        shareMyLocationBtn.setTitle("Start Location Share", for: .normal)
+        shareMyLocationBtn.backgroundColor = .darkGray
+        shareMyLocationBtn.setTitleColor(.white, for: .normal)
+        shareMyLocationBtn.layer.cornerRadius = 8
+        
+        // Disable autoresizing mask to use Auto Layout
+        shareMyLocationBtn.translatesAutoresizingMaskIntoConstraints = false
+        
+        // Add the button to the view
+        mapsVC?.addCustomViewOnMap(shareMyLocationBtn)
+        
+        // Add constraints
+        NSLayoutConstraint.activate([
+            shareMyLocationBtn.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            shareMyLocationBtn.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 40),
+            shareMyLocationBtn.widthAnchor.constraint(equalToConstant: 190),
+            shareMyLocationBtn.heightAnchor.constraint(equalToConstant: 45)
+        ])
+        
+        // Add target for tap event
+        shareMyLocationBtn.addTarget(self, action: #selector(startAndStopLocationToggle), for: .touchUpInside)
+        
+     // Remove customview using below function
+     //self.mapsVC?.removeAddedCustomViewFromMap(self.shareMyLocationBtn)
+    }
+
     //Starts sharing the location updates for the specified property, and opens the share view with a URL if the location sharing is successful.
     @objc private func startLocationSharing() {
         
