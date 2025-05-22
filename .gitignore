@@ -69,12 +69,3 @@ positioning/lib/libMapstedLib.a
 Sample/lib
 Sample/Pods/
 Sample/Podfile.lock
-iOS/Sample_LocMarketing/Sample/Podfile.lock
-iOS/Sample_with_AppTemplate/MapstedAppTemplateSampleIOS/Podfile.lock
-iOS/Sample_with_Geofence/Sample/Podfile.lock
-iOS/Sample_with_LocSimulation/Sample/Podfile.lock
-iOS/Sample_with_Map/Sample/Podfile.lock
-iOS/Sample_With_Map_SDK_POISelections_and_CustomMarker/Sample/Podfile.lock
-iOS/Sample_With_Map_UI_SDK_POISelection/Sample/Podfile.lock
-iOS/Sample_with_MapUI/Sample/Podfile.lock
-iOS/Sample_with_MapUI_LocationShare/Sample/Podfile.lock
