@@ -8,6 +8,6 @@ source 'https://github.com/Mapsted/podspec.git'
 use_frameworks!
 
 target 'Sample_MapOnly' do
-  pod 'mapsted-sdk-map', '~> 6.1.7'
+  pod 'mapsted-sdk-map', '~> 6.1.8'
 end
 
