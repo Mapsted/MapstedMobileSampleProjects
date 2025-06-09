@@ -10,21 +10,19 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.bumptech.glide.Glide
 import com.mapsted.MapstedBaseApplication
-import com.mapsted.inapp_notification.InAppNotification
 import com.mapsted.inapp_notification.InAppNotificationsApi
 import com.mapsted.inapp_notification.MapstedInAppNotificationsApi
-import com.mapsted.locmarketing.CampaignNotification
 import com.mapsted.locmarketing.LocationMarketingApi
 import com.mapsted.locmarketing.MapstedLocationMarketingApi
-import com.mapsted.locmarketing.model.HomeEntity
 import com.mapsted.positioning.CoreApi
 import com.mapsted.positioning.CoreApi.Location.NearbyPropertiesChangedListener
+import com.mapsted.positioning.MapstedCoreApiProvider
 import com.mapsted.positioning.core.utils.Logger
 import com.mapsted.samplelocmarketing.PropertyDetails
 import com.mapsted.samplelocmarketing.R
 import com.mapsted.samplelocmarketing.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity(), LocationMarketingApi.LocationMarketingCallback {
+class MainActivity : AppCompatActivity(), MapstedCoreApiProvider {
 
     var coreApi: CoreApi? = null
     private var marketingApi: LocationMarketingApi? = null
@@ -52,7 +50,7 @@ class MainActivity : AppCompatActivity(), LocationMarketingApi.LocationMarketing
     // Retrieve and display nearby properties
     private fun getNearByProperties() {
         val nearbyProperties = coreApi!!.locations().nearbyProperties
-        if (!nearbyProperties.isEmpty()) {
+        if (nearbyProperties.isNotEmpty()) {
             listPropertiesId.addAll(nearbyProperties)
             for (propertyId in listPropertiesId) {
                 addPropertyInList(propertyId)
@@ -117,17 +115,20 @@ class MainActivity : AppCompatActivity(), LocationMarketingApi.LocationMarketing
         }
     }
 
-    // Set up location marketing SDK
+    // Initialize the Location Marketing SDK
     private fun setupLocMarketingSdk(coreApi: CoreApi) {
-
+        /// create an instance of location marketing api
         marketingApi = MapstedLocationMarketingApi.newInstance(
-            applicationContext,
-            coreApi,
-            supportFragmentManager,
-            getInAppNotificationApi(),
-            this
-        )
-        marketingApi?.setup()?.initialize()
+            applicationContext,              // For showing dialogs, notifications, etc.
+            coreApi,                         // Core SDK integration
+            supportFragmentManager,          // For handling dialog fragments
+            getInAppNotificationApi()        // To show in-app notifications
+        ){ entity ->
+            // Handle notification click or 'Navigate' button action on popup here
+            // For example: redirect to given entity on the map or perform any custom navigation or simple
+            // toast it
+            Toast.makeText(this@MainActivity, "Event is on the ${entity.longName}.", Toast.LENGTH_SHORT).show()
+        }
     }
 
     //  initialization of the in-app notifications API
@@ -174,16 +175,7 @@ class MainActivity : AppCompatActivity(), LocationMarketingApi.LocationMarketing
         System.exit(0)
     }
 
-    override fun performEventAction(p0: String?, p1: MutableList<HomeEntity>?) {
-
+    override fun provideMapstedCoreApi(): CoreApi {
+        return coreApi!!
     }
-
-    override fun inAppNotificationClicked(inAppNotification: InAppNotification?) {
-        if (inAppNotification is CampaignNotification && inAppNotification.campaign.homeEntities.isNotEmpty()) {
-            val entity = inAppNotification.campaign.homeEntities
-            // Perform actions on the entities from the notification, such as logging analytics data or redirecting to the map
-        }
-    }
-
-
 }
