@@ -54,21 +54,17 @@ extension MainViewController: MapEventListener {
     
     func onMapEvent(event: MapstedMap.MapEvent) {
         
-        // Called when the map becomes idle
         if event == .MAP_IDLE {
-            //print("#Click - onMapEvent called - OnMapIdle")
+            // Called when the map becomes idle
         }
-        // Called when the map has been moved
         else if event == .MAP_MOVED {
-            //print("#Click - onMapEvent called - OnMapMoved")
+            // Called when the map has been moved
         }
-        // Called when the map is stable after interaction
         else if event == .MAP_STABLE {
-            //print("#Click - onMapEvent called - OnMapStable")
+            // Called when the map is stable after interaction
         }
-        // Called when the user interacts with the map
         else if event == .MAP_INTERACTION {
-            //print("#Click - onMapEvent called - OnMapInteraction")
+            // Called when the user interacts with the map
         }
     }
 
