@@ -65,20 +65,34 @@ class GoogleAnalyticsEvents(val mapApi: MapApi?, val coreApi: CoreApi?, val mapU
     fun setupSelectionChangeEvents() {
         mapApi?.mapView()?.data()
             ?.addMapSelectionChangeListener(object : MapSelectionChangeListener {
-                override fun onPropertySelectionChange(p0: Int, p1: Int) {
-                    Log.d("SelectionChange", "Property selected: $p0 -> $p1")
+                override fun onPropertySelectionChange(propertyId: Int, previousPropertyId: Int) {
+                    Log.d(
+                        "SelectionChange",
+                        "Property selected: $propertyId -> $previousPropertyId"
+                    )
                 }
 
-                override fun onBuildingSelectionChange(p0: Int, p1: Int, p2: Int) {
-                    Log.d("SelectionChange", "Building selected: $p0 -> $p1 on floor $p2")
+                override fun onBuildingSelectionChange(
+                    propertyId: Int,
+                    buildingId: Int,
+                    previousBuildingId: Int
+                ) {
+                    Log.d(
+                        "SelectionChange",
+                        "Building selected: $propertyId -> $buildingId on floor $previousBuildingId"
+                    )
                 }
 
-                override fun onFloorSelectionChange(p0: Int, p1: Int, p2: Int) {
-                    Log.d("SelectionChange", "Floor selected: $p0 -> $p1")
+                override fun onFloorSelectionChange(
+                    propertyId: Int,
+                    buildingId: Int,
+                    floorId: Int
+                ) {
+                    Log.d("SelectionChange", "Floor selected: $propertyId -> $buildingId")
                 }
 
-                override fun onEntitySelectionChange(p0: Entity?) {
-                    Log.e("SelectionChange", "Entity selected: ${p0?.name ?: "Unknown"}")
+                override fun onEntitySelectionChange(entity: Entity?) {
+                    Log.e("SelectionChange", "Entity selected: ${entity?.name ?: "Unknown"}")
                 }
             })
     }
@@ -132,15 +146,22 @@ class GoogleAnalyticsEvents(val mapApi: MapApi?, val coreApi: CoreApi?, val mapU
     //#27,#28  proximity offer triggered( Will provide campaignId & Adani can link that with the trigger), Recommendation triggered
     fun setupMarketingEvents() {
         coreApi?.marketing()?.addMarketingEventListener(object : MarketingEventCallback {
-            override fun onMarketingContentRequest(type: Int, callback: MarketingDataCallback?) {
-                Log.d("Marketing", "Marketing content requested: Type $type")
+            override fun onMarketingContentRequest(
+                propertyId: Int,
+                callback: MarketingDataCallback?
+            ) {
+
             }
 
-            override fun onMarketingEvent(type: Int, campaignId: String?, message: String?) {
-                Log.d(
-                    "Marketing",
-                    "Marketing event: Type $type, Campaign $campaignId, Message $message"
-                )
+            override fun onMarketingEvent(
+                propertyId: Int,
+                triggerId: String?,
+                campaignId: String?
+            ) {
+                /*marketingApi?.repo()?.getFeedsUsingPropertyId(propertyId){ feedList ->
+                    val feed = feedList.first { it.campaignId == campaignId }
+                    // use feed instance for own operation
+                }*/
             }
         })
     }
@@ -171,17 +192,17 @@ class GoogleAnalyticsEvents(val mapApi: MapApi?, val coreApi: CoreApi?, val mapU
     }
 
     // #25 On Search result click
-    fun onSearchResultSelection(){
+    fun onSearchResultSelection() {
         mapUiApi.events()?.setSearchListener(object : SearchListener {
-            override fun onCrossPropertySearchEntityGroupSelected(p0: EntityGroup) {
+            override fun onCrossPropertySearchEntityGroupSelected(item: EntityGroup) {
 
             }
 
-            override fun onFeedItemSelected(p0: String?) {
+            override fun onFeedItemSelected(feedId: String?) {
 
             }
 
-            override fun onAlertSelected(p0: String?) {
+            override fun onAlertSelected(alertId: String?) {
 
             }
 
