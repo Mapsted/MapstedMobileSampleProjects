@@ -156,7 +156,7 @@ class GoogleAnalyticsEvents(val mapApi: MapApi?, val coreApi: CoreApi?, val mapU
             override fun onMarketingEvent(
                 propertyId: Int,
                 triggerId: String?,
-                campaignId: String?
+                campaignId : String?
             ) {
                 /*marketingApi?.repo()?.getFeedsUsingPropertyId(propertyId){ feedList ->
                     val feed = feedList.first { it.campaignId == campaignId }
