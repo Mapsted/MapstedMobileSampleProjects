@@ -32,7 +32,7 @@ extension MainViewController: MapClickListener{
         
         if event.getClickType() == .SINGLE {
             if let clickedEntity = event.getClickEntity() {
-                //Process tapped entity
+                //Process if tapped on entity
                 print("onMapClicked Selected Entity Name:-\(clickedEntity.name), EntityId:\(clickedEntity.entityId())")
 
             } else if let mapOverlay = event.getClickOverlay(), !mapOverlay.toolTipName.isEmpty {
@@ -53,19 +53,25 @@ extension MainViewController: MapClickListener{
 extension MainViewController: MapEventListener {
     
     func onMapEvent(event: MapstedMap.MapEvent) {
+        
+        // Called when the map becomes idle
         if event == .MAP_IDLE {
             //print("#Click - onMapEvent called - OnMapIdle")
         }
+        // Called when the map has been moved
         else if event == .MAP_MOVED {
             //print("#Click - onMapEvent called - OnMapMoved")
         }
+        // Called when the map is stable after interaction
         else if event == .MAP_STABLE {
             //print("#Click - onMapEvent called - OnMapStable")
         }
+        // Called when the user interacts with the map
         else if event == .MAP_INTERACTION {
             //print("#Click - onMapEvent called - OnMapInteraction")
         }
     }
+
     
 }
 //MARK: - Add MapSelectionChangeObserver delegate
