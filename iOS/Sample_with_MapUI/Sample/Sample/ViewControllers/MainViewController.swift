@@ -10,7 +10,6 @@ import UIKit
 import MapstedCore
 import MapstedMap
 import MapstedMapUi
-import LocationMarketing
 
 import MapstedComponentsUI
 class MainViewController : UIViewController {
@@ -45,7 +44,6 @@ class MainViewController : UIViewController {
             MapstedMapApi.shared.setUp(prefetchProperties: false, callback: self)
         }
         
-        self.addDownloadPropertyListener()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -56,9 +54,21 @@ class MainViewController : UIViewController {
         super.viewDidAppear(animated)
     }
     
-    //Add listener to receive property download progress callback
-    func addDownloadPropertyListener(){
+    //Add map event listner
+    func setMapEventListner(){
+        
+        //Add listener When user taps any POI, Overlay and tag on the map
+        MapstedMapApi.shared.addMapClickListenerDelegate(delegate: self)
+        
+        //Add listener On map gesture interaction
+        MapstedMapApi.shared.addMapEventListenerDelegate(delegate: self)
+        
+        //Add listener to get callback when switch the floor switch
+        MapstedMapApi.shared.addMapSelectionChangeObserver(delegate: self)
+        
+        //Add listener to receive property download progress callback
         CoreApi.PropertyManager.addPropertyDownloadListener(listener: self)
+
     }
     
     //MARK: - Intialize and add MapView and display property
@@ -101,6 +111,8 @@ class MainViewController : UIViewController {
 	fileprivate func handleSuccess() {
         let propertyInfos = CoreApi.PropertyManager.getAll()
 		Logger.Log("propertyInfos", propertyInfos)
+        self.setMapEventListner()
+
         if propertyInfos.count > 0 {
             let firstProperty = propertyInfos[0]
 			Logger.Log("firstProperty", firstProperty)
@@ -202,7 +214,6 @@ class MainViewController : UIViewController {
                     self.Logger.Log("Found entity with ", " \(entity.displayName) - \(entity.entityId)")
                 }
             }
-            
             self.mapsVC?.showEntityChooser(entities: searchables, name: categoryId)
         })
     }
@@ -535,17 +546,3 @@ extension MainViewController : CategorySelectionDelegate{
     }
 }
 
-// MARK: - Property Download Delegate
-extension MainViewController: PropertyAutoDownloadListener {
-    
-    //Called when the property download completes successfully.
-    func onSuccess(propertyId: Int) {
-        print("Download Succesfully")
-    }
-    
-    //Called periodically to indicate download progress of a property.
-    func onProgress(propertyId: Int, percentage: Float) {
-        print("Downloading property -- \(propertyId)... \(percentage)% ")
-    }
-    
-}
