@@ -21,10 +21,13 @@ import com.mapsted.ui.MapstedMapUiApiProvider
 import java.util.Locale
 import java.util.stream.Collectors
 
+// Main activity responsible for rendering and interacting with the Mapsted map UI
 class MapActivity : AppCompatActivity(), MapstedMapUiApiProvider {
 
+    // View binding reference to access UI elements from layout file
     private lateinit var binding: MapUiBinding
 
+    // APIs for Core functionality, Map logic, and Map UI
     private var coreApi: CoreApi? = null
     private var mapApi: MapApi? = null
     private var mapUiApi: MapUiApi? = null
@@ -44,12 +47,14 @@ class MapActivity : AppCompatActivity(), MapstedMapUiApiProvider {
         binding = DataBindingUtil.setContentView(this, R.layout.map_ui)
         binding.mapSpinner.show()
 
+        // Initialize Core, Map, and Map UI APIs
         coreApi = (application as DemoApplication).getCoreApi(this)
         mapApi = MapstedMapApi.newInstance(application, coreApi!!)
         mapUiApi = MapstedMapUiApi.newInstance(application, mapApi!!)
 
         tActivityStart = System.currentTimeMillis()
 
+        // Start setting up the Map UI
         setupMapUiApi()
         // add below lines to integrate top notifications sdk,
         // val  _topNotificationApi = MapstedTopbarNotificationApi(supportFragmentManager, binding.notificationContainer,mapApi)
@@ -57,26 +62,29 @@ class MapActivity : AppCompatActivity(), MapstedMapUiApiProvider {
 
     override fun onDestroy() {
         Log.i(TAG, "::onDestroy")
-        mapApi?.lifecycle()?.onDestroy()
+
+        // Clean up resources used by Map and UI APIs
         mapUiApi?.lifecycle()?.onDestroy()
+        mapApi?.lifecycle()?.onDestroy()
+        coreApi?.lifecycle()?.onDestroy()
 
         super.onDestroy()
     }
 
+    // MapstedMapUiApiProvider implementation
     override fun provideMapstedUiApi(): MapUiApi? {
         return mapUiApi
     }
-
     override fun provideMapstedMapApi(): MapApi? {
         return mapApi
     }
-
     override fun provideMapstedCoreApi(): CoreApi? {
         return coreApi
     }
 
-    override fun onBackPressed() {
 
+    override fun onBackPressed() {
+        // If the map UI handles back press, intercept it
         if (mapUiApi != null && mapUiApi!!.lifecycle().onBackPressed()) {
             Log.i(TAG, "::onBackPressed - Handled by Mapsted")
             return
@@ -88,11 +96,13 @@ class MapActivity : AppCompatActivity(), MapstedMapUiApiProvider {
 
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
+        // Pass configuration changes to Map UI
         mapUiApi?.lifecycle()?.onConfigurationChanged(this, newConfig)
     }
 
+    // Initializes Mapsted UI with required setup and loads the map
     private fun setupMapUiApi() {
-
+        // Prepare custom map parameters
         val params = CustomParams.newBuilder(this, binding.flBaseMap, binding.flMapUi)
             .setBaseMapStyle(BaseMapStyle.GREY)
             .setMapPanType(MapPanType.RESTRICT_TO_SELECTED_PROPERTY)
@@ -102,6 +112,7 @@ class MapActivity : AppCompatActivity(), MapstedMapUiApiProvider {
 
         tStartInitMapsted = System.currentTimeMillis()
 
+        // Initialize the Map UI with given parameters and callbacks
         mapUiApi?.setup()?.initialize(
             params,
             object : MapUiApi.MapUiInitCallback {
@@ -117,6 +128,7 @@ class MapActivity : AppCompatActivity(), MapstedMapUiApiProvider {
                     binding.mapSpinner.hide()
                     Log.d(TAG, "setupMapUiApi: onSuccess")
 
+                    // Fetch available properties from the license
                     // Grab first property in licence
                     coreApi?.properties()?.getInfos() {  propertyInfos -> run {
                         val numProperties = propertyInfos?.size
@@ -126,12 +138,13 @@ class MapActivity : AppCompatActivity(), MapstedMapUiApiProvider {
 
                         tStartPlotRequest = System.currentTimeMillis()
 
+                        // Select the property and request to draw it on the map
                         mapApi?.data()?.selectPropertyAndDrawIfNeeded(
                             propertyId,
                             object : MapApi.PropertyPlotListener {
 
                                 override fun onCached(success: Boolean) {
-
+                                    // Optional: Handle property cached
                                 }
 
                                 override fun onPlotted(success: Boolean) {
@@ -170,16 +183,16 @@ class MapActivity : AppCompatActivity(), MapstedMapUiApiProvider {
 
                             }
                         )
-
-                        coreApi?.setup()?.startLocationServices(this@MapActivity,
-                            object : CoreApi.LocationServicesCallback {
-                                override fun onSuccess() {
-                                    Log.d(TAG, "coreApi callback -> LocServices: onSuccess")
-                                }
-                                override fun onFailure(sdkError: SdkError) {
-                                    Log.d(TAG, "coreApi callback -> LocServices: onFailure: $sdkError")
-                                }
-                            })
+                        // Start location services
+//                        coreApi?.setup()?.startLocationServices(this@MapActivity,
+//                            object : CoreApi.LocationServicesCallback {
+//                                override fun onSuccess() {
+//                                    Log.d(TAG, "coreApi callback -> LocServices: onSuccess")
+//                                }
+//                                override fun onFailure(sdkError: SdkError) {
+//                                    Log.d(TAG, "coreApi callback -> LocServices: onFailure: $sdkError")
+//                                }
+//                            })
                     }
                     }
                 }
@@ -192,6 +205,7 @@ class MapActivity : AppCompatActivity(), MapstedMapUiApiProvider {
                     Log.d(TAG, "setupMapUiApi: onStatusUpdate: $sdkUpdate")
                 }
             },
+            // Callback for location services during UI setup
             object : CoreApi.LocationServicesCallback {
                 override fun onSuccess() {
                     Log.d(TAG, "LocServices: onSuccess")
