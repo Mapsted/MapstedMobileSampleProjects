@@ -26,7 +26,7 @@ In your **app-level** `build.gradle` file, add the SDK dependencies:
 ```gradle
 dependencies {
     implementation 'com.mapsted:sdk-core:<version>'
-    implementation 'com.mapsted:sdk-map:<version>'Meerkat Feature Drop
+    implementation 'com.mapsted:sdk-map:<version>'
     implementation 'com.mapsted:sdk-map-ui:<version>'
     // Add other SDK modules if needed
 }
