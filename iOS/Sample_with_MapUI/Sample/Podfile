@@ -8,9 +8,7 @@ source 'https://github.com/Mapsted/podspec.git'
 use_frameworks!
 
 target 'Sample' do
-  pod 'mapsted-sdk-map-ui', '~> 6.1.9'
-  pod 'mapsted-sdk-loc-marketing', '~> 6.1.11'
-  pod 'mapsted-sdk-triggers-core', '~> 6.1.11'
+  pod 'mapsted-sdk-map-ui', '~> 6.1.11'
 
 end
 
