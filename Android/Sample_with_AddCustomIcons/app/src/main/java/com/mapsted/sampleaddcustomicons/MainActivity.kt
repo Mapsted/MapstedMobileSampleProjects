@@ -261,15 +261,20 @@ class MainActivity : AppCompatActivity(), MapstedMapApiProvider, MapstedMapUiApi
     fun getAllEntitiesForProperty() {
         lifecycleScope.launch {
             propertyId?.let {
+                // Fetch the list of search entities for this property
                 coreApi.properties().getSearchEntityListByPropertyId(it, { searchEntities ->
+                    // Define the allowed entity IDs that we want to filter
                     val allowedIds = setOf(75, 90, 407, 398)
+                    // Filter entities by checking if their first zone's entityId is in allowedIds
                     val filteredList = searchEntities.filter { it.entityZones.first().entityId in allowedIds }
+                    // Create custom icons for the filtered entities
                     createCustomIcons(filteredList)
                 })
             }
         }
     }
 
+    // Create custom icons
     fun createCustomIcons(searchEntities: List<SearchEntity>): ArrayList<MapIcon> {
         customIconsList.clear()
         for(i in 0 until searchEntities.size) {
@@ -284,7 +289,6 @@ class MainActivity : AppCompatActivity(), MapstedMapApiProvider, MapstedMapUiApi
         }
         return customIconsList;
     }
-
 
     // Handle device configuration changes
     override fun onConfigurationChanged(newConfig: Configuration) {
