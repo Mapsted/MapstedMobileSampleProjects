@@ -4,7 +4,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath("com.android.tools.build:gradle:4.0.0")
+        classpath("com.android.tools.build:gradle:8.4.1")
         classpath("org.jfrog.buildinfo:build-info-extractor-gradle:4.24.23")
         classpath("androidx.navigation:navigation-safe-args-gradle-plugin:2.6.0")
     }

@@ -3,7 +3,7 @@ package com.mapsted.compose_demo.ga_events
 import android.util.Log
 import com.mapsted.corepositioning.cppObjects.bridge_interfaces.MarketingEventCallback
 import com.mapsted.corepositioning.cppObjects.swig.MarketingDataCallback
-import com.mapsted.corepositioning.cppObjects.swig.RouteErrorType
+import com.mapsted.corepositioning.cppObjects.swig.RoutePathType
 import com.mapsted.map.MapApi
 import com.mapsted.map.MapApi.PropertyPlotListener
 import com.mapsted.map.MapSelectionChangeListener
@@ -15,15 +15,15 @@ import com.mapsted.map.models.events.ClickType.CLICK_TYPE_SINGLE
 import com.mapsted.map.models.events.MapClickEvent
 import com.mapsted.map.models.events.MapEvent
 import com.mapsted.positioning.CoreApi
+import com.mapsted.positioning.core.utils.Logger
 import com.mapsted.positioning.coreObjects.Entity
-import com.mapsted.positioning.coreObjects.Route
-import com.mapsted.positioning.coreObjects.RouteNode
-import com.mapsted.positioning.coreObjects.RouteSegment
-import com.mapsted.positioning.coreObjects.RouteUserProgress
-import com.mapsted.positioning.coreObjects.RoutingRequestCallback
-import com.mapsted.positioning.coreObjects.RoutingResponse
-import com.mapsted.positioning.coreObjects.RoutingStatusCallback
-import com.mapsted.positioning.coreObjects.Waypoint
+import com.mapsted.positioning.navigation.NavigationCallback
+import com.mapsted.positioning.navigation.NavigationError
+import com.mapsted.positioning.navigation.NavigationState
+import com.mapsted.positioning.routing.Route
+import com.mapsted.positioning.routing.RoutePathSegment
+import com.mapsted.positioning.routing.RoutePointInstruction
+import com.mapsted.positioning.routing.Waypoint
 import com.mapsted.ui.MapUiApi
 import com.mapsted.ui.search.EntityGroup
 import com.mapsted.ui.search.SearchListener
@@ -97,48 +97,54 @@ class GoogleAnalyticsEvents(val mapApi: MapApi?, val coreApi: CoreApi?, val mapU
             })
     }
 
-    // #10,#13,#31 Navigation Started,multi_point_route_initiated , When any error occurs during navigation
-    fun setupRoutingRequestEvents() {
-        coreApi?.routing()?.addRoutingRequestListener(object : RoutingRequestCallback {
-            override fun onSuccess(response: RoutingResponse?) {
-                Log.e("Routing", "Navigation started")
-            }
-
-            override fun onError(errorType: RouteErrorType?, errors: MutableList<String>?) {
-                Log.e("Routing", "Navigation error: ${errorType?.name}, ${errors?.joinToString()}")
-            }
-        })
-    }
-
+    // #10,#13,#31 Navigation Started, multi_point_route_initiated , When any error occurs during navigation
     // #11,#12  Navigation Completed,Navigation Rerouted
-    fun setupRoutingStatusEvents() {
-        coreApi?.routing()?.addRoutingStatusListener(object : RoutingStatusCallback {
-            override fun onRoutingStatus(isRouting: Boolean, route: Route?) {
-                Log.d("RoutingStatus", "Routing status: $isRouting")
+    fun setupRoutingRequestEvents() {
+        coreApi?.routing()?.addNavigationListener(object : NavigationCallback{
+            override fun onDestinationReached(destination: Waypoint) {
+                Logger.d("Reached destination")
+            }
+
+            override fun onNavigationInitFailure(error: NavigationError) {
+                Logger.e("onNavigationInitFailure: %s", error.errorMessage)
+            }
+
+            override fun onNavigationInitSuccess(navState: NavigationState) {
+                Logger.d("Navigation started")
+            }
+
+            override fun onNavigationStopped() {
+                Logger.d("Navigation stopped")
+            }
+
+            override fun onRouteInstruction(
+                currentInstruction: RoutePointInstruction,
+                nextInstruction: RoutePointInstruction,
+                afterInstruction: RoutePointInstruction?
+            ) {
+                Logger.d("currentInstruction: %s", currentInstruction)
+                Logger.d("nextInstruction: %s", nextInstruction)
+                Logger.d("afterInstruction: %s", afterInstruction)
+            }
+
+            override fun onRouteRecalculation(
+                state: NavigationState,
+                newRoute: Route,
+                routePathType: RoutePathType
+            ) {
+                Logger.d("onRouteRecalculation: %s", state)
             }
 
             override fun onRouteSegmentReached(
-                current: RouteSegment?,
-                previous: MutableList<RouteSegment>?,
-                upcoming: MutableList<RouteSegment>?
+                currentSegment: RoutePathSegment,
+                visitedSegments: List<RoutePathSegment>,
+                upcomingSegments: List<RoutePathSegment>
             ) {
-                Log.d("RoutingStatus", "Route segment reached")
+                Logger.d("onRouteSegmentReached: %s", currentSegment)
             }
 
-            override fun onRouteInstruction(current: RouteNode?, next: RouteNode?) {
-                Log.d("RoutingStatus", "Instruction update")
-            }
-
-            override fun onUserProgressAlongRoute(progress: RouteUserProgress?) {
-                Log.d("RoutingStatus", "User progress updated")
-            }
-
-            override fun onRouteRecalculation(route: Route?) {
-                Log.e("RoutingStatus", "Route recalculated")
-            }
-
-            override fun onDestinationReached(waypoint: Waypoint?) {
-                Log.e("RoutingStatus", "Destination reached")
+            override fun onUserProgressAlongRoute(state: NavigationState) {
+                Logger.d("onRouteRecalculation: %s", state)
             }
         })
     }
