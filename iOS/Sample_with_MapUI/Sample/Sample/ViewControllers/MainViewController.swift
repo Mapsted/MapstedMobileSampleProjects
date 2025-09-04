@@ -18,7 +18,8 @@ class MainViewController : UIViewController {
     private var mapsVC: MapstedMapUiViewController?
 	
 	let Logger = DebugLog()
-    
+    var propertyId = 504
+
     @IBOutlet weak var spinnerView: UIActivityIndicatorView!
     
     //MARK: - Segue Handler
@@ -91,7 +92,7 @@ class MainViewController : UIViewController {
         self.mapsVC?.showLoadingSpinner(text: "Loading...")
         self.spinnerView.stopAnimating()
         
-		let propertyId = propertyInfo.getPropertyId()
+        propertyId = propertyInfo.getPropertyId()
         mapsVC?.selectAndDrawProperty(propertyId: propertyId, callback: {[weak self] status in
             DispatchQueue.main.async {
                 self?.mapsVC?.hideLoadingSpinner()
@@ -360,19 +361,20 @@ class MainViewController : UIViewController {
         let entities = CoreApi.PropertyManager.findEntityByName(name: "Appl", propertyId: propertyId)
         if let destination = entities.first as? MNSearchEntity {
             let useStairs = false
-            let routeOptions = MNRouteOptions(useStairs,
-                                              escalators: true,
-                                              elevators: true,
-                                              current: true,
-                                              optimized: true)
+            let routeOptions = MNRoutingOptionsBuilder().setIncludeEscalators(true)
+                                                          .setIncludeStairs(false)
+                                                          .setIncludeRamps(true)
+                                                          .setIncludeElevators(true)
+                                                          .setItineraryOptimization(true)
+                                                          .build()
             
             CoreApi.RoutingManager.requestEstimateFromCurrentLocation(destination: destination,
                                                                       routeOptions: routeOptions,
                                                                       completion: { distTime in
                 
                 if let distanceTime = distTime {
-                    self.Logger.Log("Estimated distance is", distanceTime.distanceInMeters)
-					self.Logger.Log("Estimated time is", distanceTime.timeInMinutes)
+                    self.Logger.Log("Estimated distance is", distanceTime.distanceMeters)
+                    self.Logger.Log("Estimated time is", distanceTime.timeMinutes)
                 }
             })
         }
@@ -384,19 +386,21 @@ class MainViewController : UIViewController {
         let entities = CoreApi.PropertyManager.findEntityByName(name: "an", propertyId: propertyId)
         if let from = entities.first as? MNSearchEntity, let to = entities[1...].randomElement() as? MNSearchEntity {
             let useStairs = false
-            let routeOptions = MNRouteOptions(useStairs,
-                                              escalators: true,
-                                              elevators: true,
-                                              current: false,
-                                              optimized: true)
+            let routeOptions = MNRoutingOptionsBuilder().setIncludeEscalators(true)
+                                                          .setIncludeStairs(false)
+                                                          .setIncludeRamps(true)
+                                                          .setIncludeElevators(true)
+                                                          .setItineraryOptimization(true)
+                                                          .build()
+            
 			self.Logger.Log("Estimating distance from", "\(from.displayName) to \(to.displayName)")
             CoreApi.RoutingManager.requestEstimate(start: from,
                                                    destination: to,
                                                    routeOptions: routeOptions,
                                                    completion: { distTime in
                 if let distanceTime = distTime {
-					self.Logger.Log("Estimated distance is", "\(distanceTime.distanceInMeters) meter(s)")
-					self.Logger.Log("Estimated time is", "\(distanceTime.timeInMinutes) minute(s)")
+                    self.Logger.Log("Estimated distance is", "\(distanceTime.distanceMeters) meter(s)")
+                    self.Logger.Log("Estimated time is", "\(distanceTime.timeMinutes) minute(s)")
                 }
             })
         }
@@ -450,22 +454,19 @@ class MainViewController : UIViewController {
         let useEscalators = true
         let useElevators = true
         
-        let routeOptions = MNRouteOptions(useStairs,
-                                          escalators: useEscalators,
-                                          elevators: useElevators,
-                                          current: fromCurrentLocation,
-                                          optimized: optimizedRoute)
-        
+        let routingOptions = MNRoutingOptionsBuilder().setIncludeEscalators(true)
+                                                      .setIncludeStairs(false)
+                                                      .setIncludeRamps(true)
+                                                      .setIncludeElevators(true)
+                                                      .setItineraryOptimization(true)
+                                                      .build()
         let start = start as? MNSearchEntity
         let pois = destinations.compactMap({$0 as? MNSearchEntity})
         
                 
         //Build a route request
         var routeRequest: MNRouteRequest?
-        routeRequest = MNRouteRequest(routeOptions: routeOptions,
-                                      destinations:pois,
-                                      startEntity: fromCurrentLocation ? nil : start)
-        
+        routeRequest = MNRouteRequest(propertyId: propertyId, startWaypoint: fromCurrentLocation ? nil : start, destinationWaypoints: pois, routingOptions: routingOptions, routingConstraints: MNRoutingConstraints.emptyInstance(), isFromCurrentLocation: fromCurrentLocation)
         
         if let routeRequest = routeRequest {
             
@@ -509,12 +510,16 @@ extension MainViewController: RoutingRequestCallback {
     
     //Called when the route is successfully generated and forwards the response to the map API.
     func onSuccess(routeResponse: MNRouteResponse) {
-        MapstedMapApi.shared.handleRouteResponse(routeResponse: routeResponse)
+        if let routeError = routeResponse.routeError {
+            print("#RouteRequestDelegate: onSuccess - \(routeError.isSuccessful)")
+        }
     }
     
     //Called when there's an error generating the route and forwards the error details to the map API.
-    func onError(errorCode: Int, errorMessage: String, alertIds: [String]) {
-        MapstedMapApi.shared.handleRouteError(errorCode: errorCode, errorMessage: errorMessage, alertIds: alertIds)
+    func onError(routeResponse: MNRouteResponse) {
+        if let routeError = routeResponse.routeError {
+            print("#RouteRequestDelegate: onError - \(String(describing: routeError.errorMessage))")
+        }
     }
     
     
