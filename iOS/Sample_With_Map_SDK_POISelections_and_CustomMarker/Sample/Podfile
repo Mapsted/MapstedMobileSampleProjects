@@ -9,6 +9,6 @@ use_frameworks!
 
 target 'Sample_MapOnly' do
 
-  pod 'mapsted-sdk-map', '~> 6.1.11'
+  pod 'mapsted-sdk-map', '~> 6.2.0'
 end
 
