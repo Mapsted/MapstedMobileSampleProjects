@@ -82,6 +82,21 @@ class MainActivity : AppCompatActivity() , MapstedMapApiProvider, MapstedMapUiAp
 
     }
 
+    fun intializeCoreApi(){
+        coreApi?.setup()?.initialize(customParams, object : CoreApi.CoreInitCallback{
+            override fun onStatusUpdate(p0: SdkStatusUpdate?) {
+            }
+
+            override fun onSuccess() {
+                intializeGeofenceSDK()
+            }
+
+            override fun onFailure(p0: SdkError?) {
+
+            }
+        })
+    }
+
     // Initialize Mapsted Map UI SDK
     fun intilizeMapUiSdk() {
         if (customParams == null)
@@ -101,6 +116,9 @@ class MainActivity : AppCompatActivity() , MapstedMapApiProvider, MapstedMapUiAp
 
         showProgressDialog()
 
+        //Intilaize the core api
+        intializeCoreApi()
+
         // Initialize the Map UI API
         mapUiApi.setup().initialize(customParams!!, object : MapUiApi.MapUiInitCallback {
             override fun onCoreInitialized() {
@@ -115,7 +133,6 @@ class MainActivity : AppCompatActivity() , MapstedMapApiProvider, MapstedMapUiAp
             override fun onSuccess() {
                 Log.d("SUCCESS", "Intialized Successfully")
                 hideProgressDialog()
-                intializeGeofenceSDK()
             }
 
             override fun onStatusUpdate(sdkUpdate: SdkStatusUpdate?) {
