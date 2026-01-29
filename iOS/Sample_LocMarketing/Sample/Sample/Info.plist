@@ -45,6 +45,10 @@
 	<string>This app require the Barometer data.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Use for store sign detection</string>
+    <key>NSMicrophoneUsageDescription</key>
+    <string>This app access to your microphone for voice search.</string>
+    <key>NSSpeechRecognitionUsageDescription</key>
+    <string>This app requires speech recognition access to convert your voice to text.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>HelveticaLTStd-Roman.otf</string>

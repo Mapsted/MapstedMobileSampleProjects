@@ -29,6 +29,10 @@
     <string>This app access to your microphone for voice search.</string>
     <key>NSSpeechRecognitionUsageDescription</key>
     <string>This app requires speech recognition access to convert your voice to text.</string>
+    <key>NSMicrophoneUsageDescription</key>
+    <string>This app access to your microphone for voice search.</string>
+    <key>NSSpeechRecognitionUsageDescription</key>
+    <string>This app requires speech recognition access to convert your voice to text.</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
