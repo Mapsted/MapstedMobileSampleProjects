@@ -1,6 +1,7 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("org.jetbrains.kotlin.plugin.compose")
     id("androidx.navigation.safeargs")
 }
 
@@ -10,7 +11,7 @@ android {
     defaultConfig {
         applicationId = "com.mapsted.compose_demo"
         minSdk = 24
-        compileSdk = 34
+        compileSdk = 35
         versionCode = 5
         versionName = "1.0.4"
 
@@ -48,9 +49,6 @@ android {
         dataBinding = true
         buildConfig = true
     }
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.4.8"
-    }
     packaging {
         resources.excludes.add("META-INF/gradle/*")
         resources.excludes.add("META-INF/*")
@@ -85,7 +83,7 @@ dependencies {
     implementation("com.google.android.gms:play-services-tasks:18.0.1")
 
     // Mapsted
-    val mapstedSdkVersion = "6.1.0"
+    val mapstedSdkVersion = "6.2.9"
     implementation("com.mapsted:sdk-map-ui:$mapstedSdkVersion")
     implementation("com.mapsted:sdk-map:$mapstedSdkVersion")
     implementation("com.mapsted:sdk-core:$mapstedSdkVersion")
