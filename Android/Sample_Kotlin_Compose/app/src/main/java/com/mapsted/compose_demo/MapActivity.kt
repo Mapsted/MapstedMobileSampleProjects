@@ -62,12 +62,9 @@ class MapActivity : AppCompatActivity(), MapstedMapUiApiProvider {
 
     override fun onDestroy() {
         Log.i(TAG, "::onDestroy")
-
         // Clean up resources used by Map and UI APIs
         mapUiApi?.lifecycle()?.onDestroy()
         mapApi?.lifecycle()?.onDestroy()
-        coreApi?.lifecycle()?.onDestroy()
-
         super.onDestroy()
     }
 
@@ -99,6 +96,7 @@ class MapActivity : AppCompatActivity(), MapstedMapUiApiProvider {
         // Pass configuration changes to Map UI
         mapUiApi?.lifecycle()?.onConfigurationChanged(this, newConfig)
     }
+
 
     // Initializes Mapsted UI with required setup and loads the map
     private fun setupMapUiApi() {
